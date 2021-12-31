@@ -1,0 +1,26 @@
+<div class="header float-end">
+ 
+    <button mat-icon-button [mat-dialog-close]="data" (click)="onclose()">
+        <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  
+  <div class="header">
+    <h2 mat-dialog-title>{{data?.title}}</h2>
+  </div>
+  
+  <div mat-dialog-content>
+    <input matInput [(ngModel)]="data.name">
+  </div>
+  <div mat-dialog-content>
+    <input matInput [(ngModel)]="data.value">
+  </div>
+  <div mat-dialog-content>
+    <input matInput [(ngModel)]="data.description">
+  </div>
+  
+  <div mat-dialog-actions class="float-end">
+    <button mat-raised-button color="primary" [mat-dialog-close]="data" cdkFocusInitial>
+        {{data?.confirmText}}
+    </button>
+  </div>
