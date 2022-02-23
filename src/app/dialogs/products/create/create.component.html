@@ -1,0 +1,65 @@
+<div class="header float-end">
+ 
+    <button mat-icon-button [mat-dialog-close]="data" (click)="onclose()">
+        <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  
+  <div class="header">
+    <h2 mat-dialog-title>{{data?.title}}</h2>
+  </div>
+
+  <div mat-dialog-content>
+    <input matInput [(ngModel)]="data.name">
+  </div>
+  <div mat-dialog-content>
+    <input matInput [(ngModel)]="data.OS">
+  </div>
+  <div mat-dialog-content>
+    <input matInput [(ngModel)]="data.internalMemory">
+  </div>
+  <div mat-dialog-content>
+    <input matInput [(ngModel)]="data.RAM">
+  </div>
+  <div mat-dialog-content>
+    <input matInput [(ngModel)]="data.processor">
+  </div>
+  <div mat-dialog-content>
+    <input matInput [(ngModel)]="data.SIM">
+  </div>
+  <div mat-dialog-content>
+    <input matInput [(ngModel)]="data.SIMSlots">
+  </div>
+  <div mat-dialog-content>
+    <input matInput [(ngModel)]="data.display">
+  </div>
+  <div mat-dialog-content>
+    <input matInput [(ngModel)]="data.displayResolution">
+  </div>
+  <div mat-dialog-content>
+    <input matInput [(ngModel)]="data.displayDimensions">
+  </div>
+  <div mat-dialog-content>
+    <input matInput [(ngModel)]="data.dimensions">
+  </div>
+  <div mat-dialog-content>
+    <input matInput [(ngModel)]="data.mainCamera">
+  </div>
+  <div mat-dialog-content>
+    <input matInput [(ngModel)]="data.frontalCamera">
+  </div>
+  <div mat-dialog-content>
+    <input matInput [(ngModel)]="data.battery">
+  </div>
+  <div mat-dialog-content>
+    <input matInput [(ngModel)]="data.price">
+  </div>
+  <div mat-dialog-content>
+    <input matInput [(ngModel)]="data.inStock">
+  </div>
+ 
+  <div mat-dialog-actions class="float-end">
+    <button mat-raised-button color="primary" [mat-dialog-close]="data" cdkFocusInitial>
+        {{data?.confirmText}}
+    </button>
+  </div>

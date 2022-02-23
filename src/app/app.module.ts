@@ -4,12 +4,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { OrdersComponent } from './orders/orders.component';
-import { NewOrderComponent } from './new-order/new-order.component';
-import { ConfirmComponent } from './dialogs/confirm/confirm.component';
-import { CreateComponent } from './dialogs/create/create.component';
-import { EditComponent } from './dialogs/edit/edit.component';
-import { PreviewComponent } from './dialogs/preview/preview.component';
+
+import { ConfirmComponent } from './dialogs/products/confirm/confirm.component';
+import { CreateComponent } from './dialogs/products/create/create.component';
+import { EditComponent } from './dialogs/products/edit/edit.component';
+import { PreviewComponent } from './dialogs/products/preview/preview.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -25,18 +24,28 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { ProductsComponent } from './products/products.component';
+import { OrdersComponent } from './orders/orders.component';
+import { CardsComponent } from './cards/cards.component';
+import { CardConfirmComponent } from './dialogs/cards/card-confirm/card-confirm.component';
+import { CardCreateComponent } from './dialogs/cards/card-create/card-create.component';
+import { CardEditComponent } from './dialogs/cards/card-edit/card-edit.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    OrdersComponent,
-    NewOrderComponent,
     ConfirmComponent,
     CreateComponent,
     EditComponent,
-    PreviewComponent
+    PreviewComponent,
+    ProductsComponent,
+    OrdersComponent,
+    CardsComponent,
+    CardConfirmComponent,
+    CardCreateComponent,
+    CardEditComponent
   ],
   imports: [
     BrowserModule,
@@ -50,14 +59,10 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     MatDialogModule,
     NgbModule,
     FormsModule,
-    
     MatPaginatorModule,
     MatSortModule,
     NgxPaginationModule,
     Ng2SearchPipeModule
-
-    
-
 
   ],
   providers: [],

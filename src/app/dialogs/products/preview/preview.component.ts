@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, Optional} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { PreviewDialogData } from 'src/app/models/preview-dialog-data';
+import { PreviewDialogData } from 'src/app/models/products/preview-dialog-data';
 
 
 @Component({

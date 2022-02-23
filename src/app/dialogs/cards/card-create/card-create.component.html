@@ -8,17 +8,22 @@
   <div class="header">
     <h2 mat-dialog-title>{{data?.title}}</h2>
   </div>
-  
   <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.name">
+    <input matInput [(ngModel)]="data.bank">
   </div>
   <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.value">
+    <input matInput [(ngModel)]="data.cardNumber">
   </div>
   <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.description">
+    <input matInput [(ngModel)]="data.expirationMonth">
   </div>
-  
+  <div mat-dialog-content>
+    <input matInput [(ngModel)]="data.expirationYear">
+  </div>
+  <div mat-dialog-content>
+    <input matInput [(ngModel)]="data.securityCode">
+  </div>
+ 
   <div mat-dialog-actions class="float-end">
     <button mat-raised-button color="primary" [mat-dialog-close]="data" cdkFocusInitial>
         {{data?.confirmText}}

@@ -1,0 +1,40 @@
+<div class="container mt-5">
+    <div class="inline">
+      <input type="text" class="form-control inline" placeholder="Search..." [(ngModel)]="filterTerm">
+      <button class="button" mat-raised-button color="primary" (click) ="openCreateDialog()">New Order</button>
+    </div>
+      
+    <table mat-table class="table table-striped">
+      <thead class="thead-dark">
+          <tr>
+            <th>Bank</th>
+            <th>cardNumber</th>
+            <th>expirationMonth</th>
+            <th>expirationYear</th>
+            <th>securityCode</th>
+            <th>Actions</th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let record of records | filter: filterTerm | paginate: { itemsPerPage:10, currentPage: page}">
+          <td>{{ record.bank }}</td>
+          <td>{{ record.cardNumber }}</td>
+          <td>{{ record.expirationMonth }}</td>
+          <td>{{ record.expirationYear }}</td>
+          <td>{{ record.securityCode }}</td>
+          <td>
+            <button class="button" mat-raised-button color="warn" (click)="openDeleteDialog(record)">Delete</button>
+            <button class="button" mat-raised-button color="primary" (click)="openEditDialog(record)">Edit</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+    <div class="d-flex justify-content-center">
+      <pagination-controls 
+        previousLabel="Prev" 
+        nextLabel="Next" 
+        (pageChange)="onTableDataChange($event)">
+      </pagination-controls>
+    </div>
+  

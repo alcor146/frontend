@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, Optional} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { EditDialogData } from 'src/app/models/edit-dialog-data';
+import { EditDialogData } from 'src/app/models/products/edit-dialog-data';
 
 
 @Component({

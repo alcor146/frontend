@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
-import { ConfirmComponent } from '../dialogs/confirm/confirm.component';
-import { ConfirmDialogData } from '../models/confirm-dialog-data';
-import { EditComponent } from '../dialogs/edit/edit.component';
-import { EditDialogData } from '../models/edit-dialog-data';
-import { PreviewComponent } from '../dialogs/preview/preview.component';
-import { PreviewDialogData } from '../models/preview-dialog-data';
-import { CreateComponent } from '../dialogs/create/create.component';
-import { CreateDialogData } from '../models/create-dialog-data';
+import { ConfirmComponent } from 'src/app/dialogs/products/confirm/confirm.component';
+import { ConfirmDialogData } from 'src/app/models/products/confirm-dialog-data';
+import { EditComponent } from 'src/app/dialogs/products/edit/edit.component';
+import { EditDialogData } from 'src/app/models/products/edit-dialog-data';
+import { PreviewComponent } from 'src/app/dialogs/products/preview/preview.component';
+import { PreviewDialogData } from 'src/app/models/products/preview-dialog-data';
+import { CreateComponent } from 'src/app/dialogs/products/create/create.component';
+import { CreateDialogData } from 'src/app/models/products/create-dialog-data';
 
 
 @Injectable({
