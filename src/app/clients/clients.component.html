@@ -7,17 +7,19 @@
     <table mat-table class="table table-striped">
       <thead class="thead-dark">
           <tr>
-            <th>county</th>
-            <th>town</th>
-            <th>address</th>
+            <th>Email</th>
+            <th>Name</th>
+            <th>PhoneNumber</th>
+            <th>Password</th>
             <th>Actions</th>
           </tr>
       </thead>
       <tbody>
         <tr *ngFor="let record of records | filter: filterTerm | paginate: { itemsPerPage:10, currentPage: page}">
-          <td>{{ record.county }}</td>
-          <td>{{ record.town }}</td>
-          <td>{{ record.address }}</td>
+          <td>{{ record.email }}</td>
+          <td>{{ record.name }}</td>
+          <td>{{ record.phoneNumber }}</td>
+          <td>{{ record.password }}</td>
           <td>
             <button class="button" mat-raised-button color="warn" (click)="openDeleteDialog(record)">Delete</button>
             <button class="button" mat-raised-button color="primary" (click)="openEditDialog(record)">Edit</button>

@@ -46,11 +46,11 @@ export class CardsComponent implements OnInit {
         this.records = jsonDB.data;
       })
   }
-
+  
   openDeleteDialog(record: any){
     
     this.dialogService.confirmDialog({
-   
+    
       message: "Are you sure you want to delete this?", 
       confirmText: 'Yes',
       cancelText: 'No'

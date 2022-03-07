@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
-import { DialogService } from '../services/dialog.service.locations';
+import { DialogService } from '../services/dialog.service.clients';
 
 @Component({
-  selector: 'app-orders',
-  templateUrl: './orders.component.html',
-  styleUrls: ['./orders.component.css']
+  selector: 'app-clients',
+  templateUrl: './clients.component.html',
+  styleUrls: ['./clients.component.css']
 })
-export class OrdersComponent implements OnInit {
+export class ClientsComponent implements OnInit {
 
+  
   records: any = [];
   filterTerm: string = "";
   page: any;
@@ -21,23 +22,23 @@ export class OrdersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.showLocations();
+    this.showClients();
   }
 
   onTableDataChange(event: any){
     this.page = event;
-    this.showLocations();
+    this.showClients();
   }  
 
   onTableSizeChange(event: any): void {
     this.tableSize = event.target.value;
     this.page = 1;
-    this.showLocations();
+    this.showClients();
   }
 
-  showLocations(){
+  showClients(){
 
-      this.http.get('http://localhost:3001/api/locations')
+      this.http.get('http://localhost:3001/api/clients')
       .subscribe((res) => {
         let jsonString = JSON.stringify(res);
         let jsonDB = JSON.parse(jsonString);
@@ -56,7 +57,7 @@ export class OrdersComponent implements OnInit {
     }).subscribe( ( result ) => {  
       if(result.toString() == "true"){
         console.log(record)   
-        this.http.delete(`http://localhost:3001/api/locations/${record._id}`)
+        this.http.delete(`http://localhost:3001/api/clients/${record._id}`)
         .subscribe((res) =>{
           console.log(res);
         })
@@ -72,13 +73,14 @@ export class OrdersComponent implements OnInit {
     this.dialogService.editDialog({
       id: record._id,
       title: "edit dialog",
-      county: record.county,
-      town: record.town,
-      address: record.address,
+      email: record.email,
+      name: record.name,
+      phoneNumber: record.phoneNumber,
+      password: record.password,
       confirmText: 'Edit'
-    }).subscribe( ( newCard ) => {  
-      console.log(newCard)
-      if(newCard.confirmText.toString() == "Edit"){   
+    }).subscribe( ( newClient ) => {  
+      console.log(newClient)
+      if(newClient.confirmText.toString() == "Edit"){   
         this.dialogService.confirmDialog({
           message: "Are you sure you want to edit this?", 
           confirmText: 'Yes',
@@ -87,12 +89,13 @@ export class OrdersComponent implements OnInit {
           if(result.toString() == "true"){   
             console.log("record edited");
             let body = {
-              "county": newCard.county,
-              "town": newCard.town,
-              "address": newCard.address,
+              "email": newClient.email,
+              "name": newClient.name,
+              "phoneNumber": newClient.phoneNumber,
+              "password": newClient.password,
             }
 
-            this.http.put(`http://localhost:3001/api/locations/${record._id}`, body)
+            this.http.put(`http://localhost:3001/api/clients/${record._id}`, body)
             .subscribe((res) => {
               console.log(res)
             });
@@ -114,20 +117,22 @@ export class OrdersComponent implements OnInit {
   
     this.dialogService.createDialog({
       title: "create dialog",
-      county: "",
-      town: "",
-      address: "",
+      email: "",
+      name: "",
+      phoneNumber: "",
+      password: "",
       confirmText: 'Create'
-    }).subscribe( ( newCard ) => {  
-      console.log(newCard)
-      if(newCard.confirmText.toString() == "Create"){   
+    }).subscribe( ( newClient ) => {  
+      console.log(newClient)
+      if(newClient.confirmText.toString() == "Create"){   
         let body = {
-          "county": newCard.county,
-          "town": newCard.town,
-          "address": newCard.address,
+          "email": newClient.email,
+          "name": newClient.name,
+          "phoneNumber": newClient.phoneNumber,
+          "password": newClient.password,
         }
 
-        this.http.post(`http://localhost:3001/api/locations`, body)
+        this.http.post(`http://localhost:3001/api/clients`, body)
         .subscribe((res) =>{
           console.log(res)
         })
@@ -137,4 +142,5 @@ export class OrdersComponent implements OnInit {
       }
     });
   }
+
 }

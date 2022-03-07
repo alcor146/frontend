@@ -3,11 +3,11 @@ import { HttpClient} from '@angular/common/http';
 import { DialogService } from '../services/dialog.service.locations';
 
 @Component({
-  selector: 'app-orders',
-  templateUrl: './orders.component.html',
-  styleUrls: ['./orders.component.css']
+  selector: 'app-locations',
+  templateUrl: './locations.component.html',
+  styleUrls: ['./locations.component.css']
 })
-export class OrdersComponent implements OnInit {
+export class LocationsComponent implements OnInit {
 
   records: any = [];
   filterTerm: string = "";
@@ -76,9 +76,9 @@ export class OrdersComponent implements OnInit {
       town: record.town,
       address: record.address,
       confirmText: 'Edit'
-    }).subscribe( ( newCard ) => {  
-      console.log(newCard)
-      if(newCard.confirmText.toString() == "Edit"){   
+    }).subscribe( ( newLocation ) => {  
+      console.log(newLocation)
+      if(newLocation.confirmText.toString() == "Edit"){   
         this.dialogService.confirmDialog({
           message: "Are you sure you want to edit this?", 
           confirmText: 'Yes',
@@ -87,9 +87,9 @@ export class OrdersComponent implements OnInit {
           if(result.toString() == "true"){   
             console.log("record edited");
             let body = {
-              "county": newCard.county,
-              "town": newCard.town,
-              "address": newCard.address,
+              "county": newLocation.county,
+              "town": newLocation.town,
+              "address": newLocation.address,
             }
 
             this.http.put(`http://localhost:3001/api/locations/${record._id}`, body)
@@ -118,13 +118,13 @@ export class OrdersComponent implements OnInit {
       town: "",
       address: "",
       confirmText: 'Create'
-    }).subscribe( ( newCard ) => {  
-      console.log(newCard)
-      if(newCard.confirmText.toString() == "Create"){   
+    }).subscribe( ( newLocation ) => {  
+      console.log(newLocation)
+      if(newLocation.confirmText.toString() == "Create"){   
         let body = {
-          "county": newCard.county,
-          "town": newCard.town,
-          "address": newCard.address,
+          "county": newLocation.county,
+          "town": newLocation.town,
+          "address": newLocation.address,
         }
 
         this.http.post(`http://localhost:3001/api/locations`, body)
