@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
-import { DialogService } from '../services/dialog.service.locations';
+import { DialogService } from '../services/dialog.service.orders';
 
 @Component({
   selector: 'app-orders',
@@ -21,23 +21,23 @@ export class OrdersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.showLocations();
+    this.showOrders();
   }
 
   onTableDataChange(event: any){
     this.page = event;
-    this.showLocations();
+    this.showOrders();
   }  
 
   onTableSizeChange(event: any): void {
     this.tableSize = event.target.value;
     this.page = 1;
-    this.showLocations();
+    this.showOrders();
   }
 
-  showLocations(){
+  showOrders(){
 
-      this.http.get('http://localhost:3001/api/locations')
+      this.http.get('http://localhost:3001/api/orders')
       .subscribe((res) => {
         let jsonString = JSON.stringify(res);
         let jsonDB = JSON.parse(jsonString);
@@ -56,7 +56,7 @@ export class OrdersComponent implements OnInit {
     }).subscribe( ( result ) => {  
       if(result.toString() == "true"){
         console.log(record)   
-        this.http.delete(`http://localhost:3001/api/locations/${record._id}`)
+        this.http.delete(`http://localhost:3001/api/orders/${record._id}`)
         .subscribe((res) =>{
           console.log(res);
         })
@@ -72,6 +72,9 @@ export class OrdersComponent implements OnInit {
     this.dialogService.editDialog({
       id: record._id,
       title: "edit dialog",
+      createdBy: record.createdBy,
+      products: record.products,
+      price: record.price,
       county: record.county,
       town: record.town,
       address: record.address,
@@ -87,12 +90,15 @@ export class OrdersComponent implements OnInit {
           if(result.toString() == "true"){   
             console.log("record edited");
             let body = {
+              "createdBy": newCard.createdBy,
+              "products": newCard.products,
+              "price": newCard.price,
               "county": newCard.county,
               "town": newCard.town,
               "address": newCard.address,
             }
 
-            this.http.put(`http://localhost:3001/api/locations/${record._id}`, body)
+            this.http.put(`http://localhost:3001/api/orders/${record._id}`, body)
             .subscribe((res) => {
               console.log(res)
             });
@@ -114,6 +120,9 @@ export class OrdersComponent implements OnInit {
   
     this.dialogService.createDialog({
       title: "create dialog",
+      createdBy: "",
+      products: "",
+      price: "",
       county: "",
       town: "",
       address: "",
@@ -122,12 +131,15 @@ export class OrdersComponent implements OnInit {
       console.log(newCard)
       if(newCard.confirmText.toString() == "Create"){   
         let body = {
+          "createdBy": newCard.createdBy,
+          "products": newCard.products,
+          "price": newCard.price,
           "county": newCard.county,
           "town": newCard.town,
           "address": newCard.address,
         }
 
-        this.http.post(`http://localhost:3001/api/locations`, body)
+        this.http.post(`http://localhost:3001/api/orders`, body)
         .subscribe((res) =>{
           console.log(res)
         })

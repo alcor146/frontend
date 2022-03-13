@@ -3,57 +3,93 @@
     <button mat-icon-button mat-dialog-close="false">
         <mat-icon>close</mat-icon>
     </button>
-  </div>
-  
+</div>
+
+<div>
   <div class="header">
     <h2 mat-dialog-title>{{data?.title}}</h2>
   </div>
+  <div class="container mt-5 ">   
+    <table mat-table class="table table-striped">
+      <thead class="thead-dark">
+          <tr>
+            <th><img [src]="'http://localhost:3001/static/back.webp'" class="image">
+            </th>
+            <th><img [src]="'http://localhost:3001/static/front.webp'" class="image"></th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Name</td>
+          <td>{{data.name}}</td>     
+        </tr>
+        <tr>
+          <td>OS</td>
+          <td>{{data.OS}}</td>     
+        </tr>
+        <tr>
+          <td>internalMemory</td>
+          <td>{{data.internalMemory}}</td>     
+        </tr>
+        <tr>
+          <td>RAM</td>
+          <td>{{data.RAM}}</td>     
+        </tr>
+        <tr>
+          <td>processor</td>
+          <td>{{data.processor}}</td>     
+        </tr>
+        <tr>
+          <td>SIM</td>
+          <td>{{data.SIM}}</td>     
+        </tr>
+        <tr>
+          <td>SIMSlots</td>
+          <td>{{data.SIMSlots}}</td>     
+        </tr>
+        <tr>
+          <td>display</td>
+          <td>{{data.display}}</td>     
+        </tr>
+        <tr>
+          <td>displayResolution</td>
+          <td>{{data.displayResolution}}</td>     
+        </tr>
+        <tr>
+          <td>displayDimensions</td>
+          <td>{{data.displayDimensions}}</td>     
+        </tr>
+        <tr>
+          <td>dimensions</td>
+          <td>{{data.dimensions}}</td>     
+        </tr>
+        <tr>
+          <td>mainCamera</td>
+          <td>{{data.mainCamera}}</td>     
+        </tr>
+        <tr>
+          <td>frontalCamera</td>
+          <td>{{data.frontalCamera}}</td>     
+        </tr>
+        <tr>
+          <td>battery</td>
+          <td>{{data.battery}}</td>     
+        </tr>
+        <tr>
+          <td>price</td>
+          <td>{{data.price}}</td>     
+        </tr>
+        <tr>
+          <td>inStock</td>
+          <td>{{data.inStock}}</td>     
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
   
-  <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.name" readonly>
-  </div>
-  <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.OS" readonly>
-  </div>
-  <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.internalMemory" readonly>
-  </div>
-  <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.RAM" readonly>
-  </div>
-  <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.processor" readonly>
-  </div>
-  <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.SIM" readonly>
-  </div>
-  <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.SIMSlots" readonly>
-  </div>
-  <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.display" readonly>
-  </div>
-  <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.displayResolution" readonly>
-  </div>
-  <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.displayDimensions" readonly>
-  </div>
-  <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.dimensions" readonly>
-  </div>
-  <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.mainCamera" readonly>
-  </div>
-  <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.frontalCamera" readonly>
-  </div>
-  <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.battery" readonly>
-  </div>
-  <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.price" readonly>
-  </div>
-  <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.inStock" readonly>
-  </div>
+
+
+
+  

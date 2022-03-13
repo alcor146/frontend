@@ -17,5 +17,6 @@ export interface EditDialogData {
   battery: string,
   price: string,
   inStock: string,
+  img: any,
   confirmText: string
 }

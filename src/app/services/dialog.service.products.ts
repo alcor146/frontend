@@ -44,7 +44,8 @@ export class DialogService {
     const popUp = this.dialog
     .open(PreviewComponent, {
       data: data,
-      width: '400px',
+      width: '1000px',
+      height: '600px',
       disableClose: true,
     });
 

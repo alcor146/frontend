@@ -3,6 +3,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { PreviewDialogData } from 'src/app/models/products/preview-dialog-data';
 
 
+
+
 @Component({
   selector: 'app-preview',
   templateUrl: './preview.component.html',
@@ -11,11 +13,12 @@ import { PreviewDialogData } from 'src/app/models/products/preview-dialog-data';
 export class PreviewComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: PreviewDialogData) {
-    
   }
 
 
   ngOnInit(): void {
   }
+
+  
 
 }

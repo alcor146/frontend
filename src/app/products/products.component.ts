@@ -88,6 +88,7 @@ export class ProductsComponent implements OnInit {
       battery: record.battery,
       price: record.price,
       inStock: record.inStock,
+      img: record.img,
       confirmText: 'Edit'
     }).subscribe( ( newProduct ) => {  
       console.log(newProduct)
@@ -115,7 +116,8 @@ export class ProductsComponent implements OnInit {
               "frontalCamera": newProduct.frontalCamera,
               "battery": newProduct.battery,
               "price": newProduct.price,
-              "inStock": newProduct.inStock
+              "inStock": newProduct.inStock,
+              "img": record.img,
             }
 
             this.http.put(`http://localhost:3001/api/products/${record._id}`, body)
@@ -154,6 +156,7 @@ export class ProductsComponent implements OnInit {
       battery: record.battery,
       price: record.price,
       inStock: record.inStock,
+      img: record.img,
       
     }).subscribe( ( result ) => {  
       if(result.toString() == "false")   
@@ -208,7 +211,6 @@ export class ProductsComponent implements OnInit {
         .subscribe((res) =>{
           console.log(res)
         })
-
       } else {
         console.log("NUUUUUUUUU");
       }

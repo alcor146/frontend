@@ -23,7 +23,15 @@ export class CardsComponent implements OnInit {
 
   ngOnInit(): void {
     this.showCards();
+   
   }
+
+
+  
+
+  
+
+
 
   onTableDataChange(event: any){
     this.page = event;
@@ -46,6 +54,7 @@ export class CardsComponent implements OnInit {
         this.records = jsonDB.data;
       })
   }
+
   
   openDeleteDialog(record: any){
     
@@ -112,7 +121,6 @@ export class CardsComponent implements OnInit {
     });
 
   }
-
   
 
   openCreateDialog(){
@@ -146,4 +154,9 @@ export class CardsComponent implements OnInit {
       }
     });
   }
+
+
 }
+
+  
+
