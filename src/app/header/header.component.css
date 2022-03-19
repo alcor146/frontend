@@ -11,13 +11,12 @@ input {
     display: inline;
 }
 
-table { 
-    width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    min-width: 500px;
-}
-
 button {
     margin-left: 10px;
+    color: white;
+}
+
+#toolbar {
+    background-color: #0066ff;
+    height: 50px; 
 }

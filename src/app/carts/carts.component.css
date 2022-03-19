@@ -1,0 +1,62 @@
+
+
+
+
+
+img{
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+}
+
+
+.product-image {
+    width: 200x;
+    height: 200px;  
+    display: inline-block;
+    border: black; 
+    border-style: solid; 
+    
+
+    
+}
+
+.product-details {
+    border: yellow; 
+    border-style: solid; 
+    width: 350px;
+    height: 200pxs;
+    display: inline-block;
+
+  
+    
+}
+
+
+.product-container{
+    width: 700px;
+    height: 200px;
+    border: violet;
+    border-style: solid;
+    display: flex
+}
+
+
+.product-list {
+
+    border: blue; 
+    border-style: solid;
+    width: 800px;
+}
+
+.shop {
+    border: blue; 
+    border-style: solid;
+    height: 200px;
+    width: 400px;
+}
+
+.inline {
+    display: flex;
+}
+

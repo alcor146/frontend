@@ -17,7 +17,6 @@ export class ProductsComponent implements OnInit {
   tableSizes : Array<number> = [3, 6, 9, 12]
 
   constructor(private http: HttpClient, private dialogService: DialogService) { 
-    
   }
 
   ngOnInit(): void {
@@ -46,123 +45,121 @@ export class ProductsComponent implements OnInit {
       })
   }
 
-  openDeleteDialog(record: any){
+  // openDeleteDialog(record: any){
     
-    this.dialogService.confirmDialog({
+  //   this.dialogService.confirmDialog({
    
-      message: "Are you sure you want to delete this?", 
-      confirmText: 'Yes',
-      cancelText: 'No'
-    }).subscribe( ( result ) => {  
-      if(result.toString() == "true"){
-        console.log(record)   
-        this.http.delete(`http://localhost:3001/api/products/${record._id}`)
-        .subscribe((res) =>{
-          console.log(res);
-        })
-      } else {
-        console.log("NUUUUUUUUU");
-      }
-    });
+  //     message: "Are you sure you want to delete this?", 
+  //     confirmText: 'Yes',
+  //     cancelText: 'No'
+  //   }).subscribe( ( result ) => {  
+  //     if(result.toString() == "true"){
+  //       console.log(record)   
+  //       this.http.delete(`http://localhost:3001/api/products/${record._id}`)
+  //       .subscribe((res) =>{
+  //         console.log(res);
+  //       })
+  //     } else {
+  //       console.log("NUUUUUUUUU");
+  //     }
+  //   });
 
-  }
+  // }
 
-  openEditDialog(record: any){
+  // openEditDialog(record: any){
     
-    this.dialogService.editDialog({
-      id: record._id,
-      title: "edit dialog",
-      name: record.name,
-      OS: record.OS,
-      internalMemory: record.internalMemory,
-      RAM: record.RAM,
-      processor: record.processor,
-      SIM: record.SIM,
-      SIMSlots: record.SIMSlots,
-      display: record.display,
-      displayResolution: record.displayResolution,
-      displayDimensions: record.displayDimensions,
-      dimensions: record.dimensions,
-      mainCamera: record.mainCamera,
-      frontalCamera: record.frontalCamera,
-      battery: record.battery,
-      price: record.price,
-      inStock: record.inStock,
-      img: record.img,
-      confirmText: 'Edit'
-    }).subscribe( ( newProduct ) => {  
-      console.log(newProduct)
-      if(newProduct.confirmText.toString() == "Edit"){   
-        this.dialogService.confirmDialog({
-          message: "Are you sure you want to edit this?", 
-          confirmText: 'Yes',
-          cancelText: 'No'
-        }).subscribe( ( result ) => {  
-          if(result.toString() == "true"){   
-            console.log("record edited");
-            let body = {
-              "name": newProduct.name,
-              "OS": newProduct.OS,
-              "internalMemory": newProduct.internalMemory,
-              "RAM": newProduct.RAM,
-              "processor": newProduct.processor,
-              "SIM": newProduct.SIM,
-              "SIMSlots": newProduct.SIMSlots,
-              "display": newProduct.display,
-              "displayResolution": newProduct.displayResolution,
-              "displayDimensions": newProduct.displayDimensions,
-              "dimensions": newProduct.dimensions,
-              "mainCamera": newProduct.mainCamera,
-              "frontalCamera": newProduct.frontalCamera,
-              "battery": newProduct.battery,
-              "price": newProduct.price,
-              "inStock": newProduct.inStock,
-              "img": record.img,
-            }
+  //   this.dialogService.editDialog({
+  //     id: record._id,
+  //     title: "edit dialog",
+  //     name: record.name,
+  //     OS: record.OS,
+  //     internalMemory: record.internalMemory,
+  //     RAM: record.RAM,
+  //     processor: record.processor,
+  //     SIM: record.SIM,
+  //     SIMSlots: record.SIMSlots,
+  //     display: record.display,
+  //     displayResolution: record.displayResolution,
+  //     displayDimensions: record.displayDimensions,
+  //     dimensions: record.dimensions,
+  //     mainCamera: record.mainCamera,
+  //     frontalCamera: record.frontalCamera,
+  //     battery: record.battery,
+  //     price: record.price,
+  //     inStock: record.inStock,
+  //     confirmText: 'Edit'
+  //   }).subscribe( ( newProduct ) => {  
+  //     console.log(newProduct)
+  //     if(newProduct.confirmText.toString() == "Edit"){   
+  //       this.dialogService.confirmDialog({
+  //         message: "Are you sure you want to edit this?", 
+  //         confirmText: 'Yes',
+  //         cancelText: 'No'
+  //       }).subscribe( ( result ) => {  
+  //         if(result.toString() == "true"){   
+  //           console.log("record edited");
+  //           let body = {
+  //             "name": newProduct.name,
+  //             "OS": newProduct.OS,
+  //             "internalMemory": newProduct.internalMemory,
+  //             "RAM": newProduct.RAM,
+  //             "processor": newProduct.processor,
+  //             "SIM": newProduct.SIM,
+  //             "SIMSlots": newProduct.SIMSlots,
+  //             "display": newProduct.display,
+  //             "displayResolution": newProduct.displayResolution,
+  //             "displayDimensions": newProduct.displayDimensions,
+  //             "dimensions": newProduct.dimensions,
+  //             "mainCamera": newProduct.mainCamera,
+  //             "frontalCamera": newProduct.frontalCamera,
+  //             "battery": newProduct.battery,
+  //             "price": newProduct.price,
+  //             "inStock": newProduct.inStock,
+  //           }
 
-            this.http.put(`http://localhost:3001/api/products/${record._id}`, body)
-            .subscribe((res) => {
-              console.log(res)
-            });
+  //           this.http.put(`http://localhost:3001/api/products/${record._id}`, body)
+  //           .subscribe((res) => {
+  //             console.log(res)
+  //           });
 
-          } else {
-            console.log("NUUUUUUUUU edit");
-          }
-        });
-      } else {
-        console.log("NUUUUUUUUU");
-      }
-    });
+  //         } else {
+  //           console.log("NUUUUUUUUU edit");
+  //         }
+  //       });
+  //     } else {
+  //       console.log("NUUUUUUUUU");
+  //     }
+  //   });
 
-  }
+  // }
 
-  openPreviewDialog(record: any){
+  // openPreviewDialog(record: any){
   
-    this.dialogService.previewDialog({
-      title: "preview dialog",
-      name: record.name,
-      OS: record.OS,
-      internalMemory: record.internalMemory,
-      RAM: record.RAM,
-      processor: record.processor,
-      SIM: record.SIM,
-      SIMSlots: record.SIMSlots,
-      display: record.display,
-      displayResolution: record.displayResolution,
-      displayDimensions: record.displayDimensions,
-      dimensions: record.dimensions,
-      mainCamera: record.mainCamera,
-      frontalCamera: record.frontalCamera,
-      battery: record.battery,
-      price: record.price,
-      inStock: record.inStock,
-      img: record.img,
+  //   this.dialogService.previewDialog({
+  //     title: "preview dialog",
+  //     name: record.name,
+  //     OS: record.OS,
+  //     internalMemory: record.internalMemory,
+  //     RAM: record.RAM,
+  //     processor: record.processor,
+  //     SIM: record.SIM,
+  //     SIMSlots: record.SIMSlots,
+  //     display: record.display,
+  //     displayResolution: record.displayResolution,
+  //     displayDimensions: record.displayDimensions,
+  //     dimensions: record.dimensions,
+  //     mainCamera: record.mainCamera,
+  //     frontalCamera: record.frontalCamera,
+  //     battery: record.battery,
+  //     price: record.price,
+  //     inStock: record.inStock
+    
       
-    }).subscribe( ( result ) => {  
-      if(result.toString() == "false")   
-        console.log("dialog closed");
-    });
-  }
+  //   }).subscribe( ( result ) => {  
+  //     if(result.toString() == "false")   
+  //       console.log("dialog closed");
+  //   });
+  // }
 
   openCreateDialog(){
   
@@ -215,5 +212,9 @@ export class ProductsComponent implements OnInit {
         console.log("NUUUUUUUUU");
       }
     });
+  }
+
+  addToCart(record: any){
+    
   }
 }

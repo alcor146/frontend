@@ -1,0 +1,31 @@
+
+<div class="container mt-5 inline">
+  <div class="product-list">
+    <div class="product-container" *ngFor="let record of records">
+      <div class="product-image">
+        <img [src]="'http://localhost:3001/static/back.webp'" class="image">
+      </div>
+      <div class="product-details">
+        {{record.name}} {{ record.OS }} {{record.RAM}} {{record.internalMemory}} {{record.processor}}
+        <p *ngIf="record.inStock > 0">In stoc {{record.inStock}}</p>
+        <p *ngIf="record.inStock == 0">Sold out</p>
+        {{record.price*record.count}} Ron
+        <mat-form-field appearance="fill" width="">
+            <mat-label>Choose an option</mat-label>
+            <mat-select (selectionChange)="onChange($event.value, record.name)">
+              <mat-option value="1">1</mat-option>
+              <mat-option value="2">2</mat-option>
+              <mat-option value="3">3</mat-option>
+              <mat-option value="4">4</mat-option>
+              <mat-option value="5">5</mat-option>
+            </mat-select>
+          </mat-form-field>
+        <p>{{record.count}}</p>
+        <!-- <button class="button" mat-raised-button color="primary" (click) ="addToCart(record)">Adauga</button> -->
+      </div>
+    </div>
+  </div>
+  <div class="shop">
+    {{this.totalPrice}}
+  </div>
+</div>

@@ -1,7 +1,13 @@
-<mat-toolbar>
-    <button mat-button routerLink="/products">Products</button>
-    <button mat-button routerLink="/cards">Cards</button>
-    <button mat-button routerLink="/orders">Orders</button>
-    <button mat-button routerLink="/locations">Locations</button>
-    <button mat-button routerLink="/clients">Clients</button>
+<mat-toolbar id="toolbar">
+    <button mat-button [routerLink]="['/products']"  routerLinkActive="active">Products</button>
+    <button mat-button [routerLink]="['/orders']"  routerLinkActive="active">Orders</button>
+    <button mat-button [routerLink]="['/locations']"  routerLinkActive="active">Locations</button>
+    <button mat-button [routerLink]="['/clients']"  routerLinkActive="active">Clients</button>
+    <button mat-button [routerLink]="['/cards']" routerLinkActive="active">Cards</button>
+    <button mat-button [routerLink]="['/carts']" routerLinkActive="active">Carts</button>
+
+    <span class="example-spacer"></span>
+    <!-- <button mat-button id="logout" (click)="logout()" *ngIf="isLoggedIn">Logout</button> -->
 </mat-toolbar>
+
+

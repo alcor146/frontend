@@ -47,7 +47,12 @@ import { ClientsComponent } from './clients/clients.component';
 import { ClientConfirmComponent } from './dialogs/clients/client-confirm/client-confirm.component';
 import { ClientCreateComponent } from './dialogs/clients/client-create/client-create.component';
 import { ClientEditComponent } from './dialogs/clients/client-edit/client-edit.component';
-
+import { ProductDetailsComponent } from './product-details/product-details.component';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { CartsComponent } from './carts/carts.component';
+import { MatSelectModule } from '@angular/material/select';
 
 
 
@@ -78,6 +83,11 @@ import { ClientEditComponent } from './dialogs/clients/client-edit/client-edit.c
     ClientConfirmComponent,
     ClientCreateComponent,
     ClientEditComponent,
+    ProductDetailsComponent,
+    HomeComponent,
+    LoginComponent,
+    RegisterComponent,
+    CartsComponent,
     
   ],
   imports: [
@@ -97,6 +107,7 @@ import { ClientEditComponent } from './dialogs/clients/client-edit/client-edit.c
     NgxPaginationModule,
     Ng2SearchPipeModule,
     MatToolbarModule,
+    MatSelectModule
 
   ],
   providers: [],

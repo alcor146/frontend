@@ -16,11 +16,6 @@
     battery: string,
     price: string,
     inStock: string,
-    img: {
-      front: string,
-      back: string,
-      contentType: string
-    }
   }
 
   
