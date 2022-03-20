@@ -23,8 +23,16 @@
         <p>{{record.count}}</p>
         <!-- <button class="button" mat-raised-button color="primary" (click) ="addToCart(record)">Adauga</button> -->
       </div>
+      <div class="header float  ">
+        <!-- <h2 mat-dialog-title>{{data?.title}}</h2> -->
+        <button mat-icon-button (click)="onclose(record.name)">
+            <mat-icon>close</mat-icon>
+        </button>
     </div>
+    </div>
+    
   </div>
+  
   <div class="shop">
     {{this.totalPrice}}
   </div>

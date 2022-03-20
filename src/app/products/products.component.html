@@ -46,8 +46,8 @@
       <div class="product-image">
         <img [src]="'http://localhost:3001/static/back.webp'" class="image">
       </div>
-      <div class="product-details">
-        {{record.name}} {{ record.OS }} {{record.RAM}} {{record.internalMemory}} {{record.processor}}
+      <div class="product-details"  [routerLink]="['/products/'+record._id]" routerLinkActive="active">
+        <h5 >{{record.name}} {{ record.OS }} {{record.RAM}} {{record.internalMemory}} {{record.processor}}</h5>
         <p *ngIf="record.inStock > 0">In stoc {{record.inStock}}</p>
         <p *ngIf="record.inStock == 0">Sold out</p>
         {{record.price}} Ron

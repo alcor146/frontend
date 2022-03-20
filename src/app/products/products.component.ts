@@ -15,6 +15,7 @@ export class ProductsComponent implements OnInit {
   count: number = 0;
   tableSize: number = 7;
   tableSizes : Array<number> = [3, 6, 9, 12]
+  role: string ="admin"
 
   constructor(private http: HttpClient, private dialogService: DialogService) { 
   }
@@ -215,6 +216,15 @@ export class ProductsComponent implements OnInit {
   }
 
   addToCart(record: any){
-    
+    let body = {
+      "name": record.name,
+      "value": "1",
+    }
+    console.log(body)
+    this.http.put(`http://localhost:3001/api/carts/${this.role}`, body)
+    .subscribe((res) =>{
+      let result = JSON.parse(JSON.stringify(res))
+      console.log(result)
+    })
   }
 }

@@ -14,7 +14,7 @@ import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   {path: 'products', component: ProductsComponent},
-  {path: 'product/:productId', component: ProductDetailsComponent},
+  {path: 'products/:id', component: ProductDetailsComponent},
   {path: 'cards', component: CardsComponent},
   {path: 'orders', component: OrdersComponent},
   {path: 'locations', component: LocationsComponent},
@@ -22,8 +22,6 @@ const routes: Routes = [
   {path: "login", component: LoginComponent},
   {path: "register", component: RegisterComponent},
   {path: "carts", component: CartsComponent},
-
- 
 ];
 
 @NgModule({

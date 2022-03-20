@@ -22,12 +22,12 @@ export class CartsComponent implements OnInit {
 
   showCartProducts(){
 
-  
     this.http.get(`http://localhost:3001/api/carts/${this.role}`)
     .subscribe((res) => {
       let jsonString = JSON.stringify(res);
       let jsonDB = JSON.parse(jsonString);
       console.log(jsonDB);
+      const map = new Map(Object.entries(jsonDB.data.products));
       this.products = jsonDB.data.products;
     
       let recordsList = []
@@ -35,8 +35,8 @@ export class CartsComponent implements OnInit {
       
       for (const [key, value] of Object.entries(this.products)) {
         recordsList.push(key)
-        recordCount.push(value)
       }
+   
 
       let body = {
         "productList": recordsList
@@ -48,12 +48,10 @@ export class CartsComponent implements OnInit {
           let result = JSON.parse(JSON.stringify(res)).data
 
           for(let i=0; i<Object.keys(result).length; i++){
-            result[i].count = recordCount[i];
-            this.totalPrice = this.totalPrice + Number(result[i].price)*recordCount[i]
+            result[i].count = map.get(result[i].name);
+            this.totalPrice = this.totalPrice + Number(result[i].price)*Number(result[i].count)
           }
           this.records = result
-          console.log(this.records)
-          console.log(this.totalPrice)
         })
 
     })
@@ -73,5 +71,19 @@ onChange(value: number, recordName: string){
     console.log(result)
   })
 }
+
+onclose(name: string){
+  let body = {
+    "name": name,
+    "value": null,
+  }
+  this.http.put(`http://localhost:3001/api/carts/${this.role}`, body)
+  .subscribe((res) =>{
+    let result = JSON.parse(JSON.stringify(res))
+    console.log(result)
+  })
+
+}
+
 
 }
