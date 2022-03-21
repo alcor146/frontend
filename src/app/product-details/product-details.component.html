@@ -1,1 +1,87 @@
-<p>product-details works!</p>
+
+<div>
+  <div class="container mt-5 ">   
+    <table mat-table class="table table-striped">
+      <thead class="thead-dark">
+          <tr>
+            <th><img [src]="'http://localhost:3001/static/back.webp'" class="image"></th>
+            <th><button class="button" mat-raised-button color="warn" (click)="openDeleteDialog()">Delete</button>
+                <button class="button" mat-raised-button color="primary" (click)="openEditDialog()">Edit</button>
+            </th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Name</td>
+          <td>{{productDetails.name}}</td>     
+        </tr>
+        <tr>
+          <td>OS</td>
+          <td>{{productDetails.OS}}</td>     
+        </tr>
+        <tr>
+          <td>internalMemory</td>
+          <td>{{productDetails.internalMemory}}</td>     
+        </tr>
+        <tr>
+          <td>RAM</td>
+          <td>{{productDetails.RAM}}</td>     
+        </tr>
+        <tr>
+          <td>processor</td>
+          <td>{{productDetails.processor}}</td>     
+        </tr>
+        <tr>
+          <td>SIM</td>
+          <td>{{productDetails.SIM}}</td>     
+        </tr>
+        <tr>
+          <td>SIMSlots</td>
+          <td>{{productDetails.SIMSlots}}</td>     
+        </tr>
+        <tr>
+          <td>display</td>
+          <td>{{productDetails.display}}</td>     
+        </tr>
+        <tr>
+          <td>displayResolution</td>
+          <td>{{productDetails.displayResolution}}</td>     
+        </tr>
+        <tr>
+          <td>displayDimensions</td>
+          <td>{{productDetails.displayDimensions}}</td>     
+        </tr>
+        <tr>
+          <td>dimensions</td>
+          <td>{{productDetails.dimensions}}</td>     
+        </tr>
+        <tr>
+          <td>mainCamera</td>
+          <td>{{productDetails.mainCamera}}</td>     
+        </tr>
+        <tr>
+          <td>frontalCamera</td>
+          <td>{{productDetails.frontalCamera}}</td>     
+        </tr>
+        <tr>
+          <td>battery</td>
+          <td>{{productDetails.battery}}</td>     
+        </tr>
+        <tr>
+          <td>price</td>
+          <td>{{productDetails.price}}</td>     
+        </tr>
+        <tr>
+          <td>inStock</td>
+          <td>{{productDetails.inStock}}</td>     
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+  
+
+
+
+  

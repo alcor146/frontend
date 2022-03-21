@@ -41,7 +41,7 @@ export class ProductsComponent implements OnInit {
       .subscribe((res) => {
         let jsonString = JSON.stringify(res);
         let jsonDB = JSON.parse(jsonString);
-        console.log(jsonDB);
+        //console.log(jsonDB);
         this.records = jsonDB.data;
       })
   }

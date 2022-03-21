@@ -1,0 +1,22 @@
+td, th {
+    text-align: center; 
+    vertical-align: middle;
+}
+
+input {
+    width: 25%;
+}
+
+.inline {
+    display: inline;
+}
+
+table { 
+    width: 100%;
+    min-width: 300px;
+}
+
+button {
+    margin-left: 10px;
+}
+
