@@ -9,8 +9,8 @@
         {{record.name}} {{ record.OS }} {{record.RAM}} {{record.internalMemory}} {{record.processor}}
         <p *ngIf="record.inStock > 0">In stoc {{record.inStock}}</p>
         <p *ngIf="record.inStock == 0">Sold out</p>
-        {{record.price*record.count}} Ron
-        <mat-form-field appearance="fill" width="">
+        {{record.price}} Ron
+        <mat-form-field appearance="fill">
             <mat-label>Choose an option</mat-label>
             <mat-select (selectionChange)="onChange($event.value, record.name)">
               <mat-option value="1">1</mat-option>
@@ -19,11 +19,11 @@
               <mat-option value="4">4</mat-option>
               <mat-option value="5">5</mat-option>
             </mat-select>
-          </mat-form-field>
+        </mat-form-field>
         <p>{{record.count}}</p>
         <!-- <button class="button" mat-raised-button color="primary" (click) ="addToCart(record)">Adauga</button> -->
       </div>
-      <div class="header float  ">
+      <div class="header float">
         <!-- <h2 mat-dialog-title>{{data?.title}}</h2> -->
         <button mat-icon-button (click)="onclose(record.name)">
             <mat-icon>close</mat-icon>
@@ -35,5 +35,21 @@
   
   <div class="shop">
     {{this.totalPrice}}
+    <button class="button" mat-raised-button color="primary" (click) ="addToCart()">Adauga</button>
+    <br>
+    <mat-form-field appearance="fill" >
+      <mat-label>Choose a location</mat-label>
+      <mat-select (selectionChange)="locationOnChange($event.value)" required>
+        <mat-option *ngFor="let location of locationRecords" [value]="location">{{location.county}}</mat-option>
+      </mat-select>
+  </mat-form-field>
+
+
+  <mat-form-field appearance="fill">
+    <mat-label>Choose a card</mat-label>
+    <mat-select (selectionChange)="cardOnChange($event.value)" required>
+      <mat-option *ngFor="let card of cardRecords" [value]="card">{{card.bank}}</mat-option>
+    </mat-select>
+</mat-form-field>
   </div>
 </div>

@@ -1,0 +1,25 @@
+
+<div class="container mt-5 inline">
+    <div class="product-list">
+        <div class="product-container" *ngFor="let record of orderDetails.products">
+            <div class="product-image">
+                <img [src]="'http://localhost:3001/static/back.webp'" class="image">
+            </div>
+            <div class="product-details">
+            {{record.name}} {{ record.OS }} {{record.RAM}} {{record.internalMemory}}
+            </div>
+            <div class="product-price">
+                <b>{{record.price}} Ron</b>
+                <p>{{record.count}} buc</p>
+            </div>
+        </div>
+    </div>
+    <div class="order-detals">
+        <B>Date facturare</B>
+        <p>Destinatar: {{orderDetails.clientName}}</p>
+        <p>Numar de telefon: {{orderDetails.clientPhoneNumber}}</p>
+        <p>Adresa: {{orderDetails.location.county}}, {{orderDetails.location.town}},{{orderDetails.location.address}}</p>
+        <b>Total</b>
+        <p>{{this.totalPrice}}</p>
+    </div>
+</div>

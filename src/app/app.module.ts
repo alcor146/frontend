@@ -53,6 +53,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { CartsComponent } from './carts/carts.component';
 import { MatSelectModule } from '@angular/material/select';
+import { OrderDetailsComponent } from './order-details/order-details.component';
+
 
 
 
@@ -88,6 +90,8 @@ import { MatSelectModule } from '@angular/material/select';
     LoginComponent,
     RegisterComponent,
     CartsComponent,
+    OrderDetailsComponent,
+
     
   ],
   imports: [

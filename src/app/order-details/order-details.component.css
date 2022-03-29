@@ -10,9 +10,9 @@ img{
 }
 
 
-.order-image {
-    width: 200x;
-    height: 200px;  
+.product-image {
+    width: 120x;
+    height: 120px;  
     display: inline-block;
     border: black; 
     border-style: solid; 
@@ -21,39 +21,45 @@ img{
     
 }
 
-.order-details {
+.product-details {
     border: yellow; 
     border-style: solid; 
     width: 350px;
-    height: 200pxs;
+    height: 120pxs;
     display: inline-block;
+}
 
-  
-    
+.product-price {
+    border: yellow; 
+    border-style: solid; 
+    width: 100px;
+    height: 120pxs;
+    display: inline-block;
 }
 
 
-.order-container{
+.product-container{
     width: 700px;
-    height: 200px;
+    height: 120px;
     border: violet;
     border-style: solid;
- 
+    display: flex
 }
 
 
-.order-list {
+.product-list {
 
     border: blue; 
     border-style: solid;
     width: 800px;
+    display: inline-block;
 }
 
-.shop {
-    border: blue; 
+.order-detals {
+    border: red; 
     border-style: solid;
-    height: 200px;
-    width: 400px;
+    width: 300px;
+    display: inline-block;
 }
 
 .inline {

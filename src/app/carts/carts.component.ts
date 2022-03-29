@@ -12,17 +12,27 @@ export class CartsComponent implements OnInit {
   role: any = "admin";
   totalPrice: number = 0;
   products: Map<string, number> = new Map();
+  locationRecords: any = []
+  cardRecords: any = []
+  selectedLocation: any
+  selectedCard: any
   
 
-  constructor(private http: HttpClient, ) { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
     this.showCartProducts();
+    this.showCards()
+    this.showLocations()
   }
 
   showCartProducts(){
 
-    this.http.get(`http://localhost:3001/api/carts/${this.role}`)
+    let body = {
+      "createdBy": this.role,
+    }
+
+    this.http.post(`http://localhost:3001/api/carts/user`, body)
     .subscribe((res) => {
       let jsonString = JSON.stringify(res);
       let jsonDB = JSON.parse(jsonString);
@@ -55,7 +65,35 @@ export class CartsComponent implements OnInit {
         })
 
     })
+} 
+
+showLocations(){
+
+  let body = {
+    "createdBy": this.role,
+  }
+
+  this.http.post(`http://localhost:3001/api/locations/user`, body)
+  .subscribe((res) =>{
+    this.locationRecords = JSON.parse(JSON.stringify(res)).data
+  })
 }
+
+showCards(){
+
+
+  let body = {
+    "createdBy": this.role,
+  }
+
+  this.http.post('http://localhost:3001/api/cards/user', body)
+  .subscribe((res) => {
+    this.cardRecords = JSON.parse(JSON.stringify(res)).data
+  }) 
+}
+
+
+
 
 
 onChange(value: number, recordName: string){
@@ -72,6 +110,17 @@ onChange(value: number, recordName: string){
   })
 }
 
+
+locationOnChange(value: any){
+  this.selectedLocation = value
+  console.log(this.selectedLocation)
+}
+
+cardOnChange(value: any){
+  this.selectedCard = value
+  console.log(this.selectedCard)
+}
+
 onclose(name: string){
   let body = {
     "name": name,
@@ -81,9 +130,26 @@ onclose(name: string){
   .subscribe((res) =>{
     let result = JSON.parse(JSON.stringify(res))
     console.log(result)
+
   })
 
 }
 
+addToCart(){
+  console.log(this.records)
+  console.log(this.selectedLocation)
+  console.log(this.selectedCard)
+
+    let body = {
+      "createdBy": this.role,
+      "products": this.records,
+      "location": this.selectedLocation,
+    }
+
+    this.http.post(`http://localhost:3001/api/orders`, body)
+    .subscribe((res) =>{
+      console.log(res)
+    })
+}
 
 }

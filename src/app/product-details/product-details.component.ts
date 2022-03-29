@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router'
 import { HttpClient} from '@angular/common/http';
 import { DialogService } from 'src/app/services/dialog.service.products';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'app-product-details',
@@ -15,7 +15,7 @@ export class ProductDetailsComponent implements OnInit {
   productId: string = "";
   productDetails: any = {}
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private dialogService: DialogService, private router: Router){}
+  constructor(private route: ActivatedRoute , private router: Router, private http: HttpClient, private dialogService: DialogService){}
   
   ngOnInit(): void {
     if(this.route.snapshot.paramMap.get('id') != null)

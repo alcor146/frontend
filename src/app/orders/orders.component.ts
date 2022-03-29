@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { DialogService } from '../services/dialog.service.orders';
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'app-orders',
@@ -15,8 +17,9 @@ export class OrdersComponent implements OnInit {
   count: number = 0;
   tableSize: number = 7;
   tableSizes : Array<number> = [3, 6, 9, 12]
+  totalPrice: number =0
 
-  constructor(private http: HttpClient, private dialogService: DialogService) { 
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private dialogService: DialogService) { 
     
   }
 
@@ -41,10 +44,26 @@ export class OrdersComponent implements OnInit {
       .subscribe((res) => {
         let jsonString = JSON.stringify(res);
         let jsonDB = JSON.parse(jsonString);
-        console.log(jsonDB);
         this.records = jsonDB.data;
+        //console.log(this.records)
+        for(let i=0; i<this.records.length; i++){
+          //console.log(this.records[i].products)
+          for(let product of this.records[i].products ){
+            this.totalPrice = this.totalPrice + product.price * product.count
+          }
+          this.records[i].price = this.totalPrice
+          this.totalPrice = 0
+        }
+
+        console.log(this.records)
       })
   }
+
+  redirectToOrder(orderId: any){
+    this.router.navigate([`/orders/${orderId}`]);
+  }
+
+
   
   openDeleteDialog(record: any){
     

@@ -53,7 +53,8 @@
         <p *ngIf="record.inStock > 0">In stoc {{record.inStock}}</p>
           <p *ngIf="record.inStock == 0">Sold out</p>
         {{record.price}} Ron
-        <button class="button" mat-raised-button color="primary" (click) ="addToCart(record)">Adauga</button>
+        <button class="button" mat-raised-button color="primary" (click)="addToCart(record)">Add</button>
+
       </div>
     </div>
   </div>

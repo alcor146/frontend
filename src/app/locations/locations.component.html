@@ -7,6 +7,7 @@
     <table mat-table class="table table-striped">
       <thead class="thead-dark">
           <tr>
+            <th>createdBy</th>
             <th>county</th>
             <th>town</th>
             <th>address</th>
@@ -15,6 +16,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let record of records | filter: filterTerm | paginate: { itemsPerPage:10, currentPage: page}">
+          <td>{{record.createdBy}}</td>
           <td>{{ record.county }}</td>
           <td>{{ record.town }}</td>
           <td>{{ record.address }}</td>
