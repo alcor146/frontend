@@ -1,29 +1,29 @@
 
-<div class="container mt-5 inline">
+<div class="container mt-5 inline" *ngIf="records.length > 0">
   <div class="product-list">
     <div class="product-container" *ngFor="let record of records">
       <div class="product-image">
-        <img [src]="'http://localhost:3001/static/back.webp'" class="image">
+        <img [src]="'http://localhost:3001/static/' + record.name + '_front.webp'" class="image">
       </div>
       <div class="product-details">
-        {{record.name}} {{ record.OS }} {{record.RAM}} {{record.internalMemory}} {{record.processor}}
+        <h5 [routerLink]="['/products/'+record._id]" routerLinkActive="active">{{record.name}}, {{ record.OS }}, {{record.RAM}}, {{record.internalMemory}}</h5>
         <p *ngIf="record.inStock > 0">In stoc {{record.inStock}}</p>
         <p *ngIf="record.inStock == 0">Sold out</p>
-        {{record.price}} Ron
         <mat-form-field appearance="fill">
             <mat-label>Choose an option</mat-label>
-            <mat-select (selectionChange)="onChange($event.value, record.name)">
-              <mat-option value="1">1</mat-option>
-              <mat-option value="2">2</mat-option>
-              <mat-option value="3">3</mat-option>
-              <mat-option value="4">4</mat-option>
-              <mat-option value="5">5</mat-option>
+            <mat-select (selectionChange)="onChange($event.value, record.name)" [value]="record.count">
+              <mat-option *ngFor="let i of createArray(record.inStock)" value={{i}}>{{i}}</mat-option>
             </mat-select>
         </mat-form-field>
-        <p>{{record.count}}</p>
+        <div class="inlinePrice">
+          <p id="price">{{record.count * record.price}} Ron</p>
+        </div>
+        
+        
+  
         <!-- <button class="button" mat-raised-button color="primary" (click) ="addToCart(record)">Adauga</button> -->
       </div>
-      <div class="header float">
+      <div class="header float addBorder ">
         <!-- <h2 mat-dialog-title>{{data?.title}}</h2> -->
         <button mat-icon-button (click)="onclose(record.name)">
             <mat-icon>close</mat-icon>
@@ -34,22 +34,28 @@
   </div>
   
   <div class="shop">
-    {{this.totalPrice}}
-    <button class="button" mat-raised-button color="primary" (click) ="addToCart()">Adauga</button>
+    Total: {{this.totalPrice}}
     <br>
-    <mat-form-field appearance="fill" >
-      <mat-label>Choose a location</mat-label>
-      <mat-select (selectionChange)="locationOnChange($event.value)" required>
+    <button class="button" mat-raised-button color="primary" (click) ="createOrder()">Order</button>
+    <br>
+    <mat-form-field appearance="fill" class="mat-select-content">
+
+      <mat-select (selectionChange)="locationOnChange($event.value)" [value]="selectedLocation.county" required>
         <mat-option *ngFor="let location of locationRecords" [value]="location">{{location.county}}</mat-option>
       </mat-select>
   </mat-form-field>
+  {{selectedLocation.county}}
 
 
-  <mat-form-field appearance="fill">
+
+  <mat-form-field appearance="fill" class="mat-select-content">
     <mat-label>Choose a card</mat-label>
-    <mat-select (selectionChange)="cardOnChange($event.value)" required>
-      <mat-option *ngFor="let card of cardRecords" [value]="card">{{card.bank}}</mat-option>
+    <mat-select (selectionChange)="cardOnChange($event.value)" [value]="selectedCard.bank" required>
+      <mat-option *ngFor="let card of cardRecords" [value]="card" >{{card.bank}}</mat-option>
     </mat-select>
 </mat-form-field>
   </div>
+</div>
+<div *ngIf="records.length == 0">
+  <h2 class="center">Nu aveti produse in cos</h2>
 </div>

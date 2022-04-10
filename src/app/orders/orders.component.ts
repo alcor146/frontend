@@ -45,7 +45,7 @@ export class OrdersComponent implements OnInit {
         let jsonString = JSON.stringify(res);
         let jsonDB = JSON.parse(jsonString);
         this.records = jsonDB.data;
-        //console.log(this.records)
+        console.log(this.records)
         for(let i=0; i<this.records.length; i++){
           //console.log(this.records[i].products)
           for(let product of this.records[i].products ){
@@ -55,7 +55,7 @@ export class OrdersComponent implements OnInit {
           this.totalPrice = 0
         }
 
-        console.log(this.records)
+    
       })
   }
 
@@ -74,10 +74,10 @@ export class OrdersComponent implements OnInit {
       cancelText: 'No'
     }).subscribe( ( result ) => {  
       if(result.toString() == "true"){
-        console.log(record)   
+      
         this.http.delete(`http://localhost:3001/api/orders/${record._id}`)
         .subscribe((res) =>{
-          console.log(res);
+        
         })
       } else {
         console.log("NUUUUUUUUU");

@@ -11,54 +11,40 @@ img{
 
 
 .product-image {
-    width: 120x;
-    height: 120px;  
+    width: 200x;
+    height: 200px;  
     display: inline-block;
-    border: black; 
-    border-style: solid; 
-    
-
-    
+    border: black;
+    border-style: solid;   
 }
 
 .product-details {
-    border: yellow; 
-    border-style: solid; 
-    width: 350px;
-    height: 120pxs;
+    width: 600px;
+    height: 200pxs;
     display: inline-block;
+    border: black;
+    border-bottom-style: solid;
+    border-top-style: solid;
+    border-right-style: solid;
+    padding: 15px;
 }
-
-.product-price {
-    border: yellow; 
-    border-style: solid; 
-    width: 100px;
-    height: 120pxs;
-    display: inline-block;
-}
-
 
 .product-container{
-    width: 700px;
-    height: 120px;
-    border: violet;
-    border-style: solid;
+    width: 800px;
+    height: 200px;
+    margin-bottom: 5px;
     display: flex
 }
 
-
 .product-list {
-
-    border: blue; 
-    border-style: solid;
     width: 800px;
-    display: inline-block;
+
 }
 
 .order-detals {
     border: red; 
     border-style: solid;
-    width: 300px;
+    width: 500px;
     display: inline-block;
 }
 

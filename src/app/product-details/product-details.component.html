@@ -1,13 +1,38 @@
+<div id="content-wrapper">
+		
+
+  <div class="column">
+    <img id=featured [src]="featuredImage.src">
+      <div id="slider">
+        <img *ngFor="let image of images" class="{{image.classes.join(' ')}}" [src]="image.src" (click)="onImageClick(image)">
+      </div>
+  </div>
+
+  <div class="column">  
+    <h1>{{productDetails.name}}</h1>
+    <hr>
+    <h3>{{productDetails.price}} Ron</h3>
+   <p>We do not take responsability for any kind of damage that the product have. They are tested at the purchase time and ensured perfect condition. Any kind of compensation for damaged goods will not be provided</p>
+
+    <button class="button addButton" mat-raised-button color="primary" (click)="addToCart()">Add to cart</button>
+    <button class="button" mat-raised-button color="accent" (click)="openEditDialog()">Edit</button>
+    <button class="button" mat-raised-button color="warn" (click)="openDeleteDialog()">Delete</button>
+    
+
+  
+  </div>
+
+</div>
+
+
+
 
 <div>
   <div class="container mt-5 ">   
     <table mat-table class="table table-striped">
       <thead class="thead-dark">
           <tr>
-            <th><img [src]="'http://localhost:3001/static/back.webp'" class="image"></th>
-            <th><button class="button" mat-raised-button color="warn" (click)="openDeleteDialog()">Delete</button>
-                <button class="button" mat-raised-button color="primary" (click)="openEditDialog()">Edit</button>
-            </th>
+        
           </tr>
       </thead>
       <tbody>
@@ -84,4 +109,3 @@
 
 
 
-  

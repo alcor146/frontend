@@ -3,15 +3,14 @@
     <div class="product-list">
         <div class="product-container" *ngFor="let record of orderDetails.products">
             <div class="product-image">
-                <img [src]="'http://localhost:3001/static/back.webp'" class="image">
+                <img [src]="'http://localhost:3001/static/' + record.name + '_front.webp'" class="image">
             </div>
             <div class="product-details">
-            {{record.name}} {{ record.OS }} {{record.RAM}} {{record.internalMemory}}
+             <h5 [routerLink]="['/products/'+record._id]" routerLinkActive="active"> {{record.name}} {{ record.OS }} {{record.RAM}} {{record.internalMemory}}</h5>
+             <b>{{record.price}} Ron</b>
+             <p>{{record.count}} buc</p>
             </div>
-            <div class="product-price">
-                <b>{{record.price}} Ron</b>
-                <p>{{record.count}} buc</p>
-            </div>
+       
         </div>
     </div>
     <div class="order-detals">

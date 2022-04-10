@@ -14,6 +14,10 @@ export class ProductDetailsComponent implements OnInit {
 
   productId: string = "";
   productDetails: any = {}
+  featuredImage: any
+  images:any = []
+  imagePositions = ["front", "back", "side"]
+  role: string ="admin"
 
   constructor(private route: ActivatedRoute , private router: Router, private http: HttpClient, private dialogService: DialogService){}
   
@@ -22,18 +26,71 @@ export class ProductDetailsComponent implements OnInit {
       this.productId = this.route.snapshot.paramMap.get('id') || ""
     console.log(this.productId)
     this.showProduct()
+    
   }
 
   showProduct(){
 
-    this.http.get(`http://localhost:3001/api/products/${this.productId}`)
+   this.http.get(`http://localhost:3001/api/products/${this.productId}`)
     .subscribe((res) => {
       let jsonString = JSON.stringify(res);
       let jsonDB = JSON.parse(jsonString);
       console.log(jsonDB);
       this.productDetails = jsonDB.data;
+      this.getImages()
     })
-}
+} 
+
+  getImages(){
+    for(let position of this.imagePositions){
+      let image = {
+        "src": `http://localhost:3001/static/${this.productDetails.name}_${position}.webp`,
+        "classes": ["thumbnail"],
+        "position": position
+      }
+      this.images.push(image)
+    }
+    this.images[0].classes.push("active")
+    this.featuredImage = this.images[0]
+  }
+
+  onImageClick(newImage: any){
+    for(let image of this.images){
+      if(image.position == newImage.position){
+        image.classes.push("active")
+        this.featuredImage = image
+      }else{
+          if(image.classes.indexOf("active") != -1){
+            image.classes.splice(image.classes.indexOf('active'), 1);
+          }
+      }
+    }
+
+  }
+
+  addToCart(){
+    if(this.productDetails.inStock == 0){
+      this.dialogService.confirmDialog({
+        message: "Out of stock", 
+        confirmText: '',
+        cancelText: ''
+      }).subscribe( ( result ) => {  
+        console.log(result)
+      });
+    }else {
+      let body = {
+        "name": this.productDetails.name,
+        "value": "1",
+      }
+      console.log(body)
+      this.http.put(`http://localhost:3001/api/carts/${this.role}`, body)
+      .subscribe((res) =>{
+        let result = JSON.parse(JSON.stringify(res))
+        console.log(result)
+      })
+    }
+    
+  }
 
 openDeleteDialog(){
     
@@ -126,7 +183,6 @@ openDeleteDialog(){
     });
 
   }
-
 
 
 }

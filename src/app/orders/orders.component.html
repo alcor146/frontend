@@ -44,12 +44,12 @@
    <div class="container mt-5">
     <div class="inline">
       <input type="text" class="form-control inline" placeholder="Search..." [(ngModel)]="filterTerm">
-      <button class="button" mat-raised-button color="primary" (click) ="openCreateDialog()">New Order</button>
     </div>
     <div class="order-list">
       <div class="order-container" *ngFor="let record of records | filter: filterTerm">
         <h5>comanda {{record._id}}</h5>
         <p>Plasata pe {{record.date}}</p>
+        <p>Destinatar: {{record.createdBy}}</p>
         <p>Total: {{record.price}}</p>
         <button class="button" mat-raised-button color="primary" (click) ="redirectToOrder(record._id)">Details</button>
         <button class="button" mat-raised-button color="warn" (click) ="openDeleteDialog(record)">Delete</button>

@@ -216,15 +216,26 @@ export class ProductsComponent implements OnInit {
   }
 
   addToCart(record: any){
-    let body = {
-      "name": record.name,
-      "value": "1",
+    if(record.inStock == 0){
+      this.dialogService.confirmDialog({
+        message: "Out of stock", 
+        confirmText: '',
+        cancelText: ''
+      }).subscribe( ( result ) => {  
+        console.log(result)
+      });
+    }else {
+      let body = {
+        "name": record.name,
+        "value": "1",
+      }
+      console.log(body)
+      this.http.put(`http://localhost:3001/api/carts/${this.role}`, body)
+      .subscribe((res) =>{
+        let result = JSON.parse(JSON.stringify(res))
+        console.log(result)
+      })
     }
-    console.log(body)
-    this.http.put(`http://localhost:3001/api/carts/${this.role}`, body)
-    .subscribe((res) =>{
-      let result = JSON.parse(JSON.stringify(res))
-      console.log(result)
-    })
+    
   }
 }

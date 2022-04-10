@@ -14,8 +14,8 @@ export class CartsComponent implements OnInit {
   products: Map<string, number> = new Map();
   locationRecords: any = []
   cardRecords: any = []
-  selectedLocation: any
-  selectedCard: any
+  selectedLocation: any ={}
+  selectedCard: any = {}
   
 
   constructor(private http: HttpClient) { }
@@ -36,18 +36,19 @@ export class CartsComponent implements OnInit {
     .subscribe((res) => {
       let jsonString = JSON.stringify(res);
       let jsonDB = JSON.parse(jsonString);
-      console.log(jsonDB);
+      this.selectedCard = jsonDB.data.card
+      this.selectedLocation = jsonDB.data.location
+      // console.log(this.selectedLocation.county)
+      // console.log(this.selectedCard.bank)
       const map = new Map(Object.entries(jsonDB.data.products));
       this.products = jsonDB.data.products;
     
       let recordsList = []
-      let recordCount:any = []
       
       for (const [key, value] of Object.entries(this.products)) {
         recordsList.push(key)
       }
-   
-
+  
       let body = {
         "productList": recordsList
       }
@@ -97,7 +98,7 @@ showCards(){
 
 
 onChange(value: number, recordName: string){
- 
+
   let body = {
     "name": recordName,
     "value": value,
@@ -111,14 +112,26 @@ onChange(value: number, recordName: string){
 }
 
 
-locationOnChange(value: any){
-  this.selectedLocation = value
-  console.log(this.selectedLocation)
+locationOnChange(location: any){
+ 
+  let body = {
+    "location": location
+  }
+  this.http.put(`http://localhost:3001/api/carts/changeDetails/${this.role}`, body)
+  .subscribe((res) =>{
+    console.log(res)
+  })
 }
 
-cardOnChange(value: any){
-  this.selectedCard = value
-  console.log(this.selectedCard)
+cardOnChange(card: any){
+
+  let body = {
+    "card": card
+  }
+  this.http.put(`http://localhost:3001/api/carts/changeDetails/${this.role}`, body)
+  .subscribe((res) =>{
+
+  })
 }
 
 onclose(name: string){
@@ -135,7 +148,7 @@ onclose(name: string){
 
 }
 
-addToCart(){
+createOrder(){
   console.log(this.records)
   console.log(this.selectedLocation)
   console.log(this.selectedCard)
@@ -144,12 +157,21 @@ addToCart(){
       "createdBy": this.role,
       "products": this.records,
       "location": this.selectedLocation,
+      "card": this.selectedCard
     }
 
     this.http.post(`http://localhost:3001/api/orders`, body)
     .subscribe((res) =>{
-      console.log(res)
+   
+      this.http.post(`http://localhost:3001/api/carts/emptyCart`, body)
+    .subscribe((res) =>{
+    })
     })
 }
 
+
+createArray(N: any) {
+  const array = Array.from({length: N}, (_, index) => index + 1);
+  return array
+}
 }

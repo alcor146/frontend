@@ -1,6 +1,29 @@
 
+td, th {
+    text-align: center; 
+    vertical-align: middle;
+}
 
+input {
+    width: 25%;
+}
 
+.inline {
+    display: inline;
+    margin-bottom: 15px;
+}
+
+table { 
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    min-width: 500px;
+}
+
+button {
+    margin-left: 10px;
+    height: auto
+}
 
 
 img{
@@ -22,8 +45,7 @@ img{
 }
 
 .order-details {
-    border: yellow; 
-    border-style: solid; 
+
     width: 350px;
     height: 200pxs;
     display: inline-block;
@@ -34,18 +56,17 @@ img{
 
 
 .order-container{
-    width: 700px;
-    height: 200px;
-    border: violet;
+    width: 800px;
+    height: 220px;
+    border: black;
     border-style: solid;
+    margin-bottom: 5px;
+    padding: 10px;
  
 }
 
 
 .order-list {
-
-    border: blue; 
-    border-style: solid;
     width: 800px;
 }
 
