@@ -38,6 +38,7 @@ export class ProductDetailsComponent implements OnInit {
       console.log(jsonDB);
       this.productDetails = jsonDB.data;
       this.getImages()
+      this.imagePositions = []
     })
 } 
 
@@ -170,8 +171,7 @@ openDeleteDialog(){
             .subscribe((res) => {
               console.log(res)
               let response = JSON.parse(JSON.stringify(res))
-         
-             
+              this.showProduct()    
             });
           } else {
             console.log("NUUUUUUUUU edit");

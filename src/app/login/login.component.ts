@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'
+import {  Router } from '@angular/router'
 import { HttpClient} from '@angular/common/http';
+import { AuthService } from '../_services/auth.service';
+
+
 
 @Component({
   selector: 'app-login',
@@ -13,11 +16,6 @@ import { HttpClient} from '@angular/common/http';
 
 export class LoginComponent implements OnInit {
 
-  loginModel = {
-    email: "",
-    password: ""
-  }
-
   registerModel = {
     name: "",
     phoneNumber: "",
@@ -26,18 +24,30 @@ export class LoginComponent implements OnInit {
     confirmPassword: ""
   }
 
+  isSuccessful = false;
+  isSignUpFailed = false;
+
+  loginModel = {
+    email: "",
+    password: ""
+  }
+  isLoggedIn = false;
+  isLoginFailed = false;
+
+  roles: string[] = [];
   user: any
 
   
   validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
  
 
-  constructor( private _router: Router, private http: HttpClient) {
+  constructor( private router: Router, private http: HttpClient, private authService: AuthService) {
 
   }
 
 
   ngOnInit() {
+   
   }
 
   login() {
@@ -46,26 +56,26 @@ export class LoginComponent implements OnInit {
     else if(!this.loginModel.email.match(this.validRegex))
       alert("not an email")
     else{
+      console.log()
+      this.authService.login(this.loginModel.email, this.loginModel.password).subscribe((data) => {
+          
+          this.authService.getToken(data["token"]).subscribe((res) =>{
+            console.log(res)
+          })
+ 
 
-      let body = {
-        "email": this.loginModel.email ,
-        "password": this.loginModel.password
-      }
-
-      this.http.post('http://localhost:3003/api/clients/login', body)
-      .subscribe((res) => {
-        let jsonString = JSON.stringify(res);
-        let jsonDB = JSON.parse(jsonString);
-        console.log(jsonDB.data)
-        let localData = {
-          email: jsonDB.data[0].email,
-          password: jsonDB.data[0].password
+          
+        },
+        err => {
+          this.isSignUpFailed = true;
+          console.log(err);
         }
-        console.log(localData)
-        localStorage.setItem('client', JSON.stringify(localData));
-      })
-    }
+      );
+    } 
+  }
 
+  reloadPage(): void {
+    window.location.reload();
   }
 
   register() {
@@ -77,22 +87,17 @@ export class LoginComponent implements OnInit {
     else if(!this.registerModel.email.match(this.validRegex))
       alert("not an email")
     else{
-      console.log(this.registerModel.name)
-      console.log(this.registerModel.phoneNumber)
-      console.log(this.registerModel.email)
-      console.log(this.registerModel.password)
-      console.log(this.registerModel.confirmPassword)
-      let body = {
-        "email": this.loginModel.email ,
-        "password": this.loginModel.password
-      }
-      this.http.post('http://localhost:3003/api/clients/login', body)
-      .subscribe((res) => {
-        let jsonString = JSON.stringify(res);
-        let jsonDB = JSON.parse(jsonString);
-        console.log(jsonDB);
-        this.user = jsonDB.data;
-      })
+      this.authService.register(this.registerModel.email, this.registerModel.password, this.registerModel.phoneNumber, this.registerModel.name).subscribe(
+        data => {
+          console.log(data);
+          this.isSuccessful = true;
+          this.isSignUpFailed = false;
+        },
+        err => {
+          this.isSignUpFailed = true;
+        }
+      );
+     
     }
   }
 

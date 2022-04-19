@@ -23,6 +23,7 @@ export class OrderDetailsComponent implements OnInit {
       this.orderId = this.route.snapshot.paramMap.get('id') || ""
     console.log(this.orderId)
     this.showOrder()
+    
   }
 
   showOrder(){

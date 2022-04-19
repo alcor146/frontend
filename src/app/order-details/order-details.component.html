@@ -14,11 +14,13 @@
         </div>
     </div>
     <div class="order-detals">
-        <B>Date facturare</B>
+        <B id="price">Date facturare</B>
+        <br>
+        <br>
         <p>Destinatar: {{orderDetails.clientName}}</p>
         <p>Numar de telefon: {{orderDetails.clientPhoneNumber}}</p>
         <p>Adresa: {{orderDetails.location.county}}, {{orderDetails.location.town}},{{orderDetails.location.address}}</p>
         <b>Total</b>
-        <p>{{this.totalPrice}}</p>
+        <p id="price">{{this.totalPrice}} Ron</p>
     </div>
 </div>

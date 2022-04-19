@@ -2,8 +2,9 @@
     title: string,
     bank: string,
     cardNumber: string,
-    expirationMonth: string,
-    expirationYear: string,
+    cardName: string,
+
+    expirationDate: string,
     securityCode: string,
     confirmText: string
   }

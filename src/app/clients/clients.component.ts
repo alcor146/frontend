@@ -60,6 +60,7 @@ export class ClientsComponent implements OnInit {
         this.http.delete(`http://localhost:3001/api/clients/${record._id}`)
         .subscribe((res) =>{
           console.log(res);
+          this.showClients();
         })
       } else {
         console.log("NUUUUUUUUU");
@@ -98,6 +99,7 @@ export class ClientsComponent implements OnInit {
             this.http.put(`http://localhost:3001/api/clients/${record._id}`, body)
             .subscribe((res) => {
               console.log(res)
+              this.showClients();
             });
 
           } else {
@@ -135,6 +137,7 @@ export class ClientsComponent implements OnInit {
         this.http.post(`http://localhost:3001/api/clients`, body)
         .subscribe((res) =>{
           console.log(res)
+          this.showClients();
         })
 
       } else {

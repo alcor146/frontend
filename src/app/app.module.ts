@@ -21,7 +21,7 @@ import { LocationEditComponent } from './dialogs/locations/location-edit/locatio
 
 
 import { HeaderComponent } from './header/header.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
@@ -54,7 +54,6 @@ import { RegisterComponent } from './register/register.component';
 import { CartsComponent } from './carts/carts.component';
 import { MatSelectModule } from '@angular/material/select';
 import { OrderDetailsComponent } from './order-details/order-details.component';
-
 
 
 
@@ -92,7 +91,6 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
     CartsComponent,
     OrderDetailsComponent,
 
-    
   ],
   imports: [
     BrowserModule,

@@ -27,12 +27,6 @@ export class CardsComponent implements OnInit {
   }
 
 
-  
-
-  
-
-
-
   onTableDataChange(event: any){
     this.page = event;
     this.showCards();
@@ -69,6 +63,7 @@ export class CardsComponent implements OnInit {
         this.http.delete(`http://localhost:3001/api/cards/${record._id}`)
         .subscribe((res) =>{
           console.log(res);
+          this.showCards();
         })
       } else {
         console.log("NUUUUUUUUU");
@@ -84,8 +79,8 @@ export class CardsComponent implements OnInit {
       title: "edit dialog",
       bank: record.bank,
       cardNumber: record.cardNumber,
-      expirationMonth: record.expirationMonth,
-      expirationYear: record.expirationYear,
+      cardName: record.cardName,
+      expirationDate: record.expirationDate,
       securityCode: record.securityCode,
       confirmText: 'Edit'
     }).subscribe( ( newCard ) => {  
@@ -101,14 +96,16 @@ export class CardsComponent implements OnInit {
             let body = {
               "bank": newCard.bank,
               "cardNumber": newCard.cardNumber,
-              "expirationMonth": newCard.expirationMonth,
-              "expirationYear": newCard.expirationYear,
+              "cardName": newCard.cardName,
+        
+              "expirationDate": newCard.expirationDate,
               "securityCode": newCard.securityCode,
             }
 
             this.http.put(`http://localhost:3001/api/cards/${record._id}`, body)
             .subscribe((res) => {
               console.log(res)
+              this.showCards();
             });
 
           } else {
@@ -129,8 +126,9 @@ export class CardsComponent implements OnInit {
       title: "create dialog",
       bank: "",
       cardNumber: "",
-      expirationMonth: "",
-      expirationYear: "",
+      cardName: "",
+
+      expirationDate: "",
       securityCode: "",
       confirmText: 'Create'
     }).subscribe( ( newCard ) => {  
@@ -139,14 +137,15 @@ export class CardsComponent implements OnInit {
         let body = {
           "bank": newCard.bank,
           "cardNumber": newCard.cardNumber,
-          "expirationMonth": newCard.expirationMonth,
-          "expirationYear": newCard.expirationYear,
+          "cardName": newCard.cardName,
+          "expirationDate": newCard.expirationDate,
           "securityCode": newCard.securityCode,
         }
 
         this.http.post(`http://localhost:3001/api/cards`, body)
         .subscribe((res) =>{
           console.log(res)
+          this.showCards();
         })
 
       } else {

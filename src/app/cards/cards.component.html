@@ -10,8 +10,8 @@
             <th>createdBy</th>
             <th>Bank</th>
             <th>cardNumber</th>
-            <th>expirationMonth</th>
-            <th>expirationYear</th>
+            <th>cardName</th>
+            <th>expirationDate</th>
             <th>securityCode</th>
             <th>Actions</th>
           </tr>
@@ -21,8 +21,9 @@
           <td>{{ record.createdBy }}</td>
           <td>{{ record.bank }}</td>
           <td>{{ record.cardNumber }}</td>
-          <td>{{ record.expirationMonth }}</td>
-          <td>{{ record.expirationYear }}</td>
+          <td>{{ record.cardName }}</td>
+          <td>{{ record.expirationDate }}</td>
+
           <td>{{ record.securityCode }}</td>
           <td>
             <button class="button" mat-raised-button color="warn" (click)="openDeleteDialog(record)">Delete</button>

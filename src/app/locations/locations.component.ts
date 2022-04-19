@@ -59,6 +59,7 @@ export class LocationsComponent implements OnInit {
         this.http.delete(`http://localhost:3001/api/locations/${record._id}`)
         .subscribe((res) =>{
           console.log(res);
+          this.showLocations();
         })
       } else {
         console.log("NUUUUUUUUU");
@@ -95,6 +96,7 @@ export class LocationsComponent implements OnInit {
             this.http.put(`http://localhost:3001/api/locations/${record._id}`, body)
             .subscribe((res) => {
               console.log(res)
+              this.showLocations();
             });
 
           } else {
@@ -130,6 +132,7 @@ export class LocationsComponent implements OnInit {
         this.http.post(`http://localhost:3001/api/locations`, body)
         .subscribe((res) =>{
           console.log(res)
+          this.showLocations();
         })
 
       } else {

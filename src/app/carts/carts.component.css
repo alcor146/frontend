@@ -18,6 +18,12 @@ img{
     border-style: solid;   
 }
 
+.button{
+    margin-left: 20px;
+    height: 35px;
+    width: 90px;
+}
+
 .product-details {
 
     width: 490px;
@@ -39,14 +45,14 @@ img{
 
 
 .product-list {
-    width: 800px;
-    border-style: solid;
+    width: 750px;
+
 }
 
 .shop {
   
-    height: 200px;
-    width: 400px;
+    padding: 20px;
+    width: 550px;
     border-style: solid;
 }
 
@@ -70,6 +76,8 @@ img{
 .mat-select-content{
     width:160px !important;
     font-size: 13px !important;
+    margin-right: -50px;
+    
   } 
 
 .addBorder{

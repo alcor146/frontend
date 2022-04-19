@@ -42,13 +42,19 @@ img{
 }
 
 .order-detals {
-    border: red; 
+    border: black; 
     border-style: solid;
     width: 500px;
+    height: 410px;
     display: inline-block;
+    padding: 20px;
+    margin-left: 10px;
 }
 
 .inline {
     display: flex;
 }
 
+#price{
+    font-size: 20px;
+}

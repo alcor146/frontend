@@ -50,7 +50,7 @@
         <div class="product-details"  [routerLink]="['/products/'+record._id]" routerLinkActive="active">
           <h5 >{{record.name}} {{record.OS}} {{record.RAM}} {{record.internalMemory}} {{record.processor}}</h5>
         </div>
-        <p *ngIf="record.inStock > 0">In stoc {{record.inStock}}</p>
+        <p *ngIf="record.inStock > 0">In stock {{record.inStock}}</p>
           <p *ngIf="record.inStock == 0">Sold out</p>
         {{record.price}} Ron
         <button class="button" mat-raised-button color="primary" (click)="addToCart(record)">Add to cart</button>
