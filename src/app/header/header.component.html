@@ -1,14 +1,16 @@
 <mat-toolbar id="toolbar">
     <button mat-button [routerLink]="['/products']"  routerLinkActive="active">Products</button>
-    <button mat-button [routerLink]="['/orders']"  routerLinkActive="active">Orders</button>
-    <button mat-button [routerLink]="['/locations']"  routerLinkActive="active">Locations</button>
-    <button mat-button [routerLink]="['/clients']"  routerLinkActive="active">Clients</button>
-    <button mat-button [routerLink]="['/cards']" routerLinkActive="active">Cards</button>
-    <button mat-button [routerLink]="['/carts']" routerLinkActive="active">Carts</button>
-    <button mat-button [routerLink]="['/login']" routerLinkActive="active">Login</button>
+    <button mat-button [routerLink]="['/orders']"  routerLinkActive="active" *ngIf="isLoggedIn">Orders</button>
+    <button mat-button [routerLink]="['/locations']"  routerLinkActive="active" *ngIf="isLoggedIn">Locations</button>
+    <!-- <button mat-button [routerLink]="['/clients']"  routerLinkActive="active" *ngIf="isLoggedIn && role == 'user'">Clients</button> -->
+    <button mat-button [routerLink]="['/clients']"  routerLinkActive="active" *ngIf="isLoggedIn">Clients</button>
+    <button mat-button [routerLink]="['/cards']" routerLinkActive="active" *ngIf="isLoggedIn">Cards</button>
+    <button mat-button [routerLink]="['/carts']" routerLinkActive="active" *ngIf="isLoggedIn">Carts</button>
+    <button mat-button [routerLink]="['/login']"  routerLinkActive="active" *ngIf="!isLoggedIn">Login</button>
+    
 
     <span class="example-spacer"></span>
-    <!-- <button mat-button id="logout" (click)="logout()" *ngIf="isLoggedIn">Logout</button> -->
+    <button mat-button id="logout" (click)="logout()" *ngIf="isLoggedIn">Logout</button>
 </mat-toolbar>
 
 

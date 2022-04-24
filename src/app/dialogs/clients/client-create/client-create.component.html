@@ -9,16 +9,19 @@
     <h2 mat-dialog-title>{{data?.title}}</h2>
   </div>
   <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.email">
+    <input matInput [(ngModel)]="data.role" placeholder="role">
   </div>
   <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.name">
+    <input matInput [(ngModel)]="data.email" placeholder="email">
   </div>
   <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.phoneNumber">
+    <input matInput [(ngModel)]="data.name" placeholder="name">
   </div>
   <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.password">
+    <input matInput [(ngModel)]="data.phoneNumber" placeholder="phoneNumber">
+  </div>
+  <div mat-dialog-content>
+    <input matInput [(ngModel)]="data.password" placeholder="password">
   </div>
  
   <div mat-dialog-actions class="float-end">

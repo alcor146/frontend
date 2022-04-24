@@ -7,6 +7,7 @@
     <table mat-table class="table table-striped">
       <thead class="thead-dark">
           <tr>
+            <th>Role</th>
             <th>Email</th>
             <th>Name</th>
             <th>PhoneNumber</th>
@@ -16,6 +17,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let record of records | filter: filterTerm | paginate: { itemsPerPage:10, currentPage: page}">
+          <td>{{ record.role }}</td>
           <td>{{ record.email }}</td>
           <td>{{ record.name }}</td>
           <td>{{ record.phoneNumber }}</td>

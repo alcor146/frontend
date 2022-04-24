@@ -60,7 +60,13 @@ export class ClientsComponent implements OnInit {
         this.http.delete(`http://localhost:3001/api/clients/${record._id}`)
         .subscribe((res) =>{
           console.log(res);
-          this.showClients();
+          this.http.delete(`http://localhost:3001/api/carts/${record.email}`)
+          .subscribe((res) =>{
+            console.log(res);
+  
+            
+            this.showClients();
+          })
         })
       } else {
         console.log("NUUUUUUUUU");
@@ -74,6 +80,7 @@ export class ClientsComponent implements OnInit {
     this.dialogService.editDialog({
       id: record._id,
       title: "edit dialog",
+      role: record.role,
       email: record.email,
       name: record.name,
       phoneNumber: record.phoneNumber,
@@ -90,6 +97,7 @@ export class ClientsComponent implements OnInit {
           if(result.toString() == "true"){   
             console.log("record edited");
             let body = {
+              "role": newClient.role,
               "email": newClient.email,
               "name": newClient.name,
               "phoneNumber": newClient.phoneNumber,
@@ -119,6 +127,7 @@ export class ClientsComponent implements OnInit {
   
     this.dialogService.createDialog({
       title: "create dialog",
+      role: "",
       email: "",
       name: "",
       phoneNumber: "",
@@ -128,6 +137,7 @@ export class ClientsComponent implements OnInit {
       console.log(newClient)
       if(newClient.confirmText.toString() == "Create"){   
         let body = {
+          "role": newClient.role,
           "email": newClient.email,
           "name": newClient.name,
           "phoneNumber": newClient.phoneNumber,

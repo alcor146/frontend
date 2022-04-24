@@ -30,7 +30,8 @@
     <div class="shop">
       Address 
       <mat-form-field appearance="fill" class="mat-select-content">
-        <mat-label>{{selectedLocation.county}}</mat-label>
+        <mat-label *ngIf="!selectedLocation">No location selected</mat-label>
+        <mat-label *ngIf="selectedLocation">{{selectedLocation.county}}</mat-label>
         <mat-select (selectionChange)="locationOnChange($event.value)" [value]="selectedLocation.county">
           <mat-option *ngFor="let location of locationRecords" [value]="location">{{location.county}}</mat-option>
         </mat-select>
@@ -43,18 +44,19 @@
       <br>
       Bank
       <mat-form-field appearance="fill" class="mat-select-content">
-        <mat-label>{{selectedCard.bank}}</mat-label>
+        <mat-label *ngIf="!selectedCard">no card selected</mat-label>
+        <mat-label *ngIf="selectedCard">{{selectedCard.bank}}</mat-label>
         <mat-select (selectionChange)="cardOnChange($event.value)" [value]="selectedCard.bank" required>
           <mat-option *ngFor="let card of cardRecords" [value]="card" >{{card.bank}}</mat-option>
         </mat-select>
     </mat-form-field>
-    <input type="text" class="form-control inline"  [(ngModel)]="selectedCard.cardName" readonly>
+    <input type="text" class="form-control inline" placeholder="Card Name" [(ngModel)]="selectedCard.cardName" readonly>
     <div class="inline">
-      <input type="text" class="form-control inline" [(ngModel)]="selectedCard.securityCode" readonly>
-      <input type="text" class="form-control inline" [(ngModel)]="selectedCard.expirationDate" readonly>
+      <input type="text" class="form-control inline" placeholder="Security Code" [(ngModel)]="selectedCard.securityCode" readonly>
+      <input type="text" class="form-control inline" placeholder="Expiration Date" [(ngModel)]="selectedCard.expirationDate" readonly>
 
     </div>
-    <input type="text" class="form-control inline" [(ngModel)]="selectedCard.cardNumber" readonly>
+    <input type="text" class="form-control inline" placeholder="Card Number" [(ngModel)]="selectedCard.cardNumber" readonly>
     <br>
     <div class="inline">
       <p id="price">Total: {{this.totalPrice}} Ron</p>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { DialogService } from 'src/app/services/dialog.service.products';
-
+import { AuthService } from '../_services/auth.service';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -16,12 +16,14 @@ export class ProductsComponent implements OnInit {
   tableSize: number = 7;
   tableSizes : Array<number> = [3, 6, 9, 12]
   role: string ="admin"
+  user: any = ""
+  userinfo: any = {}
 
-  constructor(private http: HttpClient, private dialogService: DialogService) { 
+  constructor(private http: HttpClient, private dialogService: DialogService, private authService: AuthService) { 
   }
 
   ngOnInit(): void {
-    
+    this.getRoles()
     this.showProducts();
   }
 
@@ -45,6 +47,16 @@ export class ProductsComponent implements OnInit {
         this.records = jsonDB.data;
       })
   }
+
+  getRoles(){
+    let token = localStorage.getItem("token")
+    console.log(token)
+    if(token){
+      this.authService.getRoles(token).subscribe((res)=>{
+        this.user = res.token.userId
+      })
+    }
+}
 
 
   openCreateDialog(){
@@ -115,7 +127,7 @@ export class ProductsComponent implements OnInit {
         "value": "1",
       }
       console.log(body)
-      this.http.put(`http://localhost:3001/api/carts/${this.role}`, body)
+      this.http.put(`http://localhost:3001/api/carts/${this.user}`, body)
       .subscribe((res) =>{
         let result = JSON.parse(JSON.stringify(res))
         console.log(result)

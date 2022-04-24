@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { DialogService } from '../services/dialog.service.cards';
+import { RBACService } from '../_helpers/rbac';
 
 
 @Component({
@@ -16,14 +17,28 @@ export class CardsComponent implements OnInit {
   count: number = 0;
   tableSize: number = 7;
   tableSizes : Array<number> = [3, 6, 9, 12]
+  role: string = ""
+  user: string = ""
 
-  constructor(private http: HttpClient, private dialogService: DialogService) { 
+
+  constructor(private http: HttpClient, private dialogService: DialogService, private rbacService: RBACService) { 
     
   }
 
   ngOnInit(): void {
-    this.showCards();
+    this.getRoles();
    
+  }
+
+  getRoles(){
+    this.rbacService.getRoles().subscribe((data) =>{
+   
+      if(data.status == "200"){
+        this.user = data.token.userId
+        this.role = data.token.role
+        this.showCards();
+      }
+    })
   }
 
 
@@ -39,7 +54,16 @@ export class CardsComponent implements OnInit {
   }
 
   showCards(){
-
+    console.log(this.user )
+    if(this.role == "basic"){
+      this.http.post('http://localhost:3001/api/cards/user', {createdBy: this.user})
+      .subscribe((res) => {
+        let jsonString = JSON.stringify(res);
+        let jsonDB = JSON.parse(jsonString);
+        console.log(jsonDB);
+        this.records = jsonDB.data;
+      })
+    }else if(this.role == "admin"){
       this.http.get('http://localhost:3001/api/cards')
       .subscribe((res) => {
         let jsonString = JSON.stringify(res);
@@ -47,6 +71,9 @@ export class CardsComponent implements OnInit {
         console.log(jsonDB);
         this.records = jsonDB.data;
       })
+    } else{
+      console.log("not an admin or user")
+    }
   }
 
   
@@ -121,13 +148,11 @@ export class CardsComponent implements OnInit {
   
 
   openCreateDialog(){
-  
     this.dialogService.createDialog({
       title: "create dialog",
       bank: "",
       cardNumber: "",
       cardName: "",
-
       expirationDate: "",
       securityCode: "",
       confirmText: 'Create'
@@ -135,6 +160,7 @@ export class CardsComponent implements OnInit {
       console.log(newCard)
       if(newCard.confirmText.toString() == "Create"){   
         let body = {
+          "createdBy": this.user,
           "bank": newCard.bank,
           "cardNumber": newCard.cardNumber,
           "cardName": newCard.cardName,

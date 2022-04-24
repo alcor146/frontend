@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
+import { RBACService } from '../_helpers/rbac';
+
 
 @Component({
   selector: 'app-carts',
@@ -9,42 +11,51 @@ import { HttpClient} from '@angular/common/http';
 export class CartsComponent implements OnInit {
 
   records: any = [];
-  role: any = "admin";
+  role: any = "";
   totalPrice: number = 0;
   products: Map<string, number> = new Map();
   locationRecords: any = []
   cardRecords: any = []
   selectedLocation: any ={}
-  selectedCounty: any
   selectedCard: any = {}
+  user: any = ""
   
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private rbacService: RBACService) { }
 
   ngOnInit(): void {
-    this.showCartProducts();
-    this.showCards()
-    this.showLocations()
+    this.getRoles()
+  }
+
+  getRoles(){
+    this.rbacService.getRoles().subscribe((data) =>{
+   
+      if(data.status == "200"){
+        this.user = data.token.userId
+        this.role = data.token.role
+        this.showCartProducts();
+        this.showCards()
+        this.showLocations()
+      }
+    })
   }
 
   showCartProducts(){
-
-    
-
     let body = {
-      "createdBy": this.role,
+      "createdBy": this.user,
     }
+ 
 
     this.http.post(`http://localhost:3001/api/carts/user`, body)
     .subscribe((res) => {
       let jsonString = JSON.stringify(res);
       let jsonDB = JSON.parse(jsonString);
-      console.log(jsonDB.data)
+      console.log(jsonDB)
       this.selectedCard = jsonDB.data.card
       this.selectedLocation = jsonDB.data.location
-      this.selectedCounty = jsonDB.data.location.county
-      // console.log(this.selectedLocation.county)
-      console.log(this.selectedCard)
+
+   
+     
       const map = new Map(Object.entries(jsonDB.data.products));
       this.products = jsonDB.data.products;
     
@@ -76,7 +87,7 @@ export class CartsComponent implements OnInit {
 showLocations(){
 
   let body = {
-    "createdBy": this.role,
+    "createdBy": this.user,
   }
 
   this.http.post(`http://localhost:3001/api/locations/user`, body)
@@ -89,7 +100,7 @@ showCards(){
 
 
   let body = {
-    "createdBy": this.role,
+    "createdBy": this.user,
   }
 
   this.http.post('http://localhost:3001/api/cards/user', body)
@@ -101,8 +112,9 @@ showCards(){
 showCurrentCartDetails(){
 
   let body = {
-    "createdBy": this.role,
+    "createdBy": this.user,
   }
+  
 
   this.http.post(`http://localhost:3001/api/carts/user`, body)
   .subscribe((res) =>{
@@ -123,7 +135,7 @@ onChange(value: number, recordName: string){
     "value": value,
   }
   console.log(body)
-  this.http.put(`http://localhost:3001/api/carts/${this.role}`, body)
+  this.http.put(`http://localhost:3001/api/carts/${this.user}`, body)
   .subscribe((res) =>{
     let result = JSON.parse(JSON.stringify(res))
     console.log(result)
@@ -137,7 +149,7 @@ locationOnChange(location: any){
   let body = {
     "location": location
   }
-  this.http.put(`http://localhost:3001/api/carts/changeDetails/${this.role}`, body)
+  this.http.put(`http://localhost:3001/api/carts/changeDetails/${this.user}`, body)
   .subscribe((res) =>{
     console.log(res)
     this.showCurrentCartDetails()
@@ -149,7 +161,7 @@ cardOnChange(card: any){
   let body = {
     "card": card
   }
-  this.http.put(`http://localhost:3001/api/carts/changeDetails/${this.role}`, body)
+  this.http.put(`http://localhost:3001/api/carts/changeDetails/${this.user}`, body)
   .subscribe((res) =>{
     this.showCartProducts();
   })
@@ -160,7 +172,7 @@ onclose(name: string){
     "name": name,
     "value": null,
   }
-  this.http.put(`http://localhost:3001/api/carts/${this.role}`, body)
+  this.http.put(`http://localhost:3001/api/carts/${this.user}`, body)
   .subscribe((res) =>{
     let result = JSON.parse(JSON.stringify(res))
     console.log(result)
@@ -176,7 +188,7 @@ createOrder(){
   console.log(this.selectedCard)
 
     let body = {
-      "createdBy": this.role,
+      "createdBy": this.user,
       "products": this.records,
       "location": this.selectedLocation,
       "card": this.selectedCard
@@ -187,6 +199,8 @@ createOrder(){
    
       this.http.post(`http://localhost:3001/api/carts/emptyCart`, body)
     .subscribe((res) =>{
+      this.showCartProducts();
+      alert("Comanda plasata")
     })
     })
 }
@@ -196,4 +210,7 @@ createArray(N: any) {
   const array = Array.from({length: N}, (_, index) => index + 1);
   return array
 }
+
+
+
 }

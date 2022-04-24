@@ -6,6 +6,9 @@ const AUTH_API = 'http://localhost:3003/api/';
   providedIn: 'root'
 })
 export class AuthService {
+
+  _isLoggedIn: boolean = false
+
   constructor(private http: HttpClient) { }
   login(email: string, password: string): Observable<any> {
     const httpOptions = {
@@ -16,7 +19,7 @@ export class AuthService {
       password: password,
     }, httpOptions);
   }
-  register(email: string, password: string, name: string, phoneNumber: string): Observable<any> {
+  register(email: string, password: string, passwordConfirmation: string, name: string, phoneNumber: string): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
@@ -24,11 +27,14 @@ export class AuthService {
       email: email,
       password: password,
       phoneNumber: phoneNumber,
-      name: name
+      name: name,
+      passwordConfirmation: passwordConfirmation
     }, httpOptions);
   }
 
-  getToken(token: string): Observable<any> {
+  getRoles(token: any): Observable<any> {
+    if(token == null)
+      return null as any
     const httpOptions = {
       headers: new HttpHeaders({ 
         'Content-Type': 'application/json',
@@ -36,8 +42,9 @@ export class AuthService {
       })
     };
 
-    return this.http.post(AUTH_API + 'decodeToken', {
-      
-    }, httpOptions);
+    return this.http.get(AUTH_API + 'decodeToken', httpOptions);
   }
+
+
+
 }

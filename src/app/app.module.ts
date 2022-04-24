@@ -54,6 +54,7 @@ import { RegisterComponent } from './register/register.component';
 import { CartsComponent } from './carts/carts.component';
 import { MatSelectModule } from '@angular/material/select';
 import { OrderDetailsComponent } from './order-details/order-details.component';
+import { AuthService } from './_services/auth.service';
 
 
 
@@ -112,7 +113,7 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
     MatSelectModule
 
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

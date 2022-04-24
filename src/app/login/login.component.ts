@@ -56,27 +56,23 @@ export class LoginComponent implements OnInit {
     else if(!this.loginModel.email.match(this.validRegex))
       alert("not an email")
     else{
-      console.log()
       this.authService.login(this.loginModel.email, this.loginModel.password).subscribe((data) => {
-          
-          this.authService.getToken(data["token"]).subscribe((res) =>{
-            console.log(res)
-          })
- 
-
-          
-        },
-        err => {
-          this.isSignUpFailed = true;
-          console.log(err);
+          console.log(data)
+          if(data.status != "200"){
+            console.log("login failed")
+          }else{
+            localStorage.setItem('token', data["token"]);
+            localStorage.setItem('isLoggedIn', "true");
+            this.router.navigate(['/products']).then(() => {
+              window.location.reload();
+            });
+          }
         }
       );
     } 
   }
 
-  reloadPage(): void {
-    window.location.reload();
-  }
+
 
   register() {
 
@@ -87,14 +83,19 @@ export class LoginComponent implements OnInit {
     else if(!this.registerModel.email.match(this.validRegex))
       alert("not an email")
     else{
-      this.authService.register(this.registerModel.email, this.registerModel.password, this.registerModel.phoneNumber, this.registerModel.name).subscribe(
+      this.authService.register(this.registerModel.email, this.registerModel.password, this.registerModel.confirmPassword, this.registerModel.name, this.registerModel.phoneNumber).subscribe(
         data => {
-          console.log(data);
-          this.isSuccessful = true;
-          this.isSignUpFailed = false;
+          let body = {
+            "createdBy": this.registerModel.email
+          }
+  
+          this.http.post(`http://localhost:3001/api/carts`, body)
+          .subscribe((res) =>{
+            console.log(res)
+          })
         },
         err => {
-          this.isSignUpFailed = true;
+          
         }
       );
      
