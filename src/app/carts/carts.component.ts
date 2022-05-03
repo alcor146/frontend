@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { RBACService } from '../_helpers/rbac';
+import { AuthService } from '../_services/auth.service';
+import { DialogService } from '../services/dialog.service.clients';
 
 
 @Component({
@@ -19,9 +21,16 @@ export class CartsComponent implements OnInit {
   selectedLocation: any ={}
   selectedCard: any = {}
   user: any = ""
+  userData: any = {}
+
+  orderCreated: boolean = false
+  modalCard: boolean = false
+  modalLocation: boolean = false
+
+  public isVisible: boolean = false;
   
 
-  constructor(private http: HttpClient, private rbacService: RBACService) { }
+  constructor(private http: HttpClient, private rbacService: RBACService, private authService: AuthService, private dialogService: DialogService ) { }
 
   ngOnInit(): void {
     this.getRoles()
@@ -33,9 +42,14 @@ export class CartsComponent implements OnInit {
       if(data.status == "200"){
         this.user = data.token.userId
         this.role = data.token.role
+        console.log(this.role)
         this.showCartProducts();
         this.showCards()
         this.showLocations()
+        this.showClient()
+      }else{
+        this.authService.logOut()
+        window.location.reload();
       }
     })
   }
@@ -93,6 +107,20 @@ showLocations(){
   this.http.post(`http://localhost:3001/api/locations/user`, body)
   .subscribe((res) =>{
     this.locationRecords = JSON.parse(JSON.stringify(res)).data
+  })
+}
+
+showClient(){
+
+  let body = {
+    "email": this.user,
+  }
+  console.log(body)
+
+  this.http.post(`http://localhost:3001/api/clients/user`, body)
+  .subscribe((res) =>{
+    this.userData = JSON.parse(JSON.stringify(res)).data[0]
+    console.log(this.userData)
   })
 }
 
@@ -184,9 +212,16 @@ onclose(name: string){
 
 createOrder(){
   console.log(this.records)
-  console.log(this.selectedLocation)
-  console.log(this.selectedCard)
+  console.log("LOCATION",this.selectedLocation)
+  console.log("CARD",this.selectedCard)
 
+  if(Object.keys(this.selectedLocation).length === 0){
+    this.modalLocation = true
+    this.showAlert()
+  }else if(Object.keys(this.selectedCard).length === 0){
+    this.modalCard = true
+    this.showAlert()
+  }else{
     let body = {
       "createdBy": this.user,
       "products": this.records,
@@ -199,16 +234,75 @@ createOrder(){
    
       this.http.post(`http://localhost:3001/api/carts/emptyCart`, body)
     .subscribe((res) =>{
+      this.orderCreated = true
+      this.showAlert()
       this.showCartProducts();
-      alert("Comanda plasata")
     })
     })
+  }
 }
 
 
 createArray(N: any) {
   const array = Array.from({length: N}, (_, index) => index + 1);
   return array
+}
+
+
+showAlert() : void {
+  if (this.isVisible) { // if the alert is visible return
+    return;
+  } 
+  this.isVisible = true;
+  setTimeout(()=> {
+    this.isVisible = false
+    this.orderCreated = false
+    this.modalCard = false
+    this.modalLocation = false
+  },2500); // hide the alert after 2.5s
+}
+
+openEditDialog(){
+    
+  this.dialogService.profileEditDialog({
+    id: this.userData._id,
+    title: "edit dialog",
+    name: this.userData.name,
+    phoneNumber: this.userData.phoneNumber,
+    confirmText: 'Edit'
+  }).subscribe( ( newClient ) => {  
+    console.log(newClient)
+    if(newClient.confirmText.toString() == "Edit"){   
+      this.dialogService.confirmDialog({
+        message: "Are you sure you want to edit this?", 
+        confirmText: 'Yes',
+        cancelText: 'No'
+      }).subscribe( ( result ) => {  
+        if(result.toString() == "true"){   
+          console.log("record edited");
+          let body = {
+            "role": this.userData.role,
+            "email": this.userData.email,
+            "name": newClient.name,
+            "phoneNumber": newClient.phoneNumber,
+            "password": this.userData.password,
+          }
+
+          this.http.put(`http://localhost:3001/api/clients/${this.userData._id}`, body)
+          .subscribe((res) => {
+            this.showClient()
+         
+          });
+
+        } else {
+          console.log("NUUUUUUUUU edit");
+        }
+      });
+    } else {
+      console.log("NUUUUUUUUU");
+    }
+  });
+
 }
 
 

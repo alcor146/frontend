@@ -15,13 +15,16 @@
    <p>We do not take responsability for any kind of damage that the product have. They are tested at the purchase time and ensured perfect condition. Any kind of compensation for damaged goods will not be provided</p>
 
     <button class="button addButton" mat-raised-button color="primary" (click)="addToCart()">Add to cart</button>
-    <button class="button" mat-raised-button color="accent" (click)="openEditDialog()">Edit</button>
-    <button class="button" mat-raised-button color="warn" (click)="openDeleteDialog()">Delete</button>
-    
-
-  
+    <button class="button" mat-raised-button color="accent" (click)="openEditDialog()" *ngIf="role == 'admin'">Edit</button>
+    <button class="button" mat-raised-button color="warn" (click)="openDeleteDialog()" *ngIf="role == 'admin'">Delete</button>
   </div>
 
+</div>
+<div class="alert" [class.visible]="isVisible" *ngIf="outOfStock"> 
+  Product is not available
+</div>
+<div class="alert" style="background: green" [class.visible]="isVisible" *ngIf="addedToCart"> 
+  Product added to cart
 </div>
 
 
@@ -41,11 +44,11 @@
           <td>{{productDetails.name}}</td>     
         </tr>
         <tr>
-          <td>OS</td>
+          <td>Operating System</td>
           <td>{{productDetails.OS}}</td>     
         </tr>
         <tr>
-          <td>internalMemory</td>
+          <td>Internal Memory</td>
           <td>{{productDetails.internalMemory}}</td>     
         </tr>
         <tr>
@@ -53,7 +56,7 @@
           <td>{{productDetails.RAM}}</td>     
         </tr>
         <tr>
-          <td>processor</td>
+          <td>Processor</td>
           <td>{{productDetails.processor}}</td>     
         </tr>
         <tr>
@@ -61,43 +64,43 @@
           <td>{{productDetails.SIM}}</td>     
         </tr>
         <tr>
-          <td>SIMSlots</td>
+          <td>SIM Slots</td>
           <td>{{productDetails.SIMSlots}}</td>     
         </tr>
         <tr>
-          <td>display</td>
+          <td>Display</td>
           <td>{{productDetails.display}}</td>     
         </tr>
         <tr>
-          <td>displayResolution</td>
+          <td>Display Resolution</td>
           <td>{{productDetails.displayResolution}}</td>     
         </tr>
         <tr>
-          <td>displayDimensions</td>
+          <td>Display Dimensions</td>
           <td>{{productDetails.displayDimensions}}</td>     
         </tr>
         <tr>
-          <td>dimensions</td>
+          <td>Dimensions</td>
           <td>{{productDetails.dimensions}}</td>     
         </tr>
         <tr>
-          <td>mainCamera</td>
+          <td>Camera</td>
           <td>{{productDetails.mainCamera}}</td>     
         </tr>
         <tr>
-          <td>frontalCamera</td>
+          <td>Frontal Camera</td>
           <td>{{productDetails.frontalCamera}}</td>     
         </tr>
         <tr>
-          <td>battery</td>
+          <td>Battery capacity</td>
           <td>{{productDetails.battery}}</td>     
         </tr>
         <tr>
-          <td>price</td>
+          <td>Price</td>
           <td>{{productDetails.price}}</td>     
         </tr>
         <tr>
-          <td>inStock</td>
+          <td>In Stock</td>
           <td>{{productDetails.inStock}}</td>     
         </tr>
       </tbody>

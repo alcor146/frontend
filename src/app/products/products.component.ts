@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { DialogService } from 'src/app/services/dialog.service.products';
 import { AuthService } from '../_services/auth.service';
+import { RBACService } from '../_helpers/rbac';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -15,14 +16,19 @@ export class ProductsComponent implements OnInit {
   count: number = 0;
   tableSize: number = 7;
   tableSizes : Array<number> = [3, 6, 9, 12]
-  role: string ="admin"
+  role: string =""
   user: any = ""
   userinfo: any = {}
+  
+  public isVisible: boolean = false;
+  addedToCart: boolean = false;
+  outOfStock: boolean = false;
 
-  constructor(private http: HttpClient, private dialogService: DialogService, private authService: AuthService) { 
+  constructor(private http: HttpClient, private dialogService: DialogService, private authService: AuthService, private rbacService: RBACService) { 
   }
 
   ngOnInit(): void {
+    console.log(this.authService.role)
     this.getRoles()
     this.showProducts();
   }
@@ -49,14 +55,17 @@ export class ProductsComponent implements OnInit {
   }
 
   getRoles(){
-    let token = localStorage.getItem("token")
-    console.log(token)
-    if(token){
-      this.authService.getRoles(token).subscribe((res)=>{
-        this.user = res.token.userId
-      })
-    }
-}
+    this.rbacService.getRoles().subscribe((data) =>{
+      if(data.status == "200"){
+        this.role = data.token.role
+        this.user = data.token.userId
+        this.showProducts();
+      }else{
+        this.authService.logOut()
+        window.location.reload();
+      }
+    })
+  }
 
 
   openCreateDialog(){
@@ -114,13 +123,8 @@ export class ProductsComponent implements OnInit {
 
   addToCart(record: any){
     if(record.inStock == 0){
-      this.dialogService.confirmDialog({
-        message: "Out of stock", 
-        confirmText: '',
-        cancelText: ''
-      }).subscribe( ( result ) => {  
-        console.log(result)
-      });
+      this.outOfStock = true
+      this.showAlert()
     }else {
       let body = {
         "name": record.name,
@@ -131,9 +135,23 @@ export class ProductsComponent implements OnInit {
       .subscribe((res) =>{
         let result = JSON.parse(JSON.stringify(res))
         console.log(result)
-        alert('Product was added to cart')
+          this.addedToCart = true
+          this.showAlert()
       })
-    }
-    
+    } 
+  }
+
+
+  showAlert() : void {
+    if (this.isVisible) { // if the alert is visible return
+      return;
+    } 
+    this.isVisible = true;
+    setTimeout(()=> {
+      this.isVisible = false
+      this.addedToCart = false
+      this.outOfStock = false
+
+    },2500); // hide the alert after 2.5s
   }
 }

@@ -1,65 +1,65 @@
-<div class="header float-end">
+<div class="center">
+  <div class="header close">
  
     <button mat-icon-button [mat-dialog-close]="data" (click)="onclose()">
         <mat-icon>close</mat-icon>
     </button>
   </div>
-  
-  <div class="header">
-    <h2 mat-dialog-title>{{data?.title}}</h2>
-  </div>
 
-  <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.name" placeholder="name">
+
+  <div mat-dialog-content >
+    <input matInput [(ngModel)]="data.name" placeholder="Name" >
   </div>
   <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.OS" placeholder="OS">
+    <input matInput [(ngModel)]="data.OS" placeholder="Operating System">
   </div>
   <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.internalMemory" placeholder="internalMemory">
+    <input matInput [(ngModel)]="data.internalMemory" placeholder="Internal Memory">
   </div>
   <div mat-dialog-content>
     <input matInput [(ngModel)]="data.RAM" placeholder="RAM">
   </div>
   <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.processor" placeholder="processor">
+    <input matInput [(ngModel)]="data.processor" placeholder="Processor">
   </div>
   <div mat-dialog-content>
     <input matInput [(ngModel)]="data.SIM" placeholder="SIM">
   </div>
   <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.SIMSlots" placeholder="SIMSlots">
+    <input matInput [(ngModel)]="data.SIMSlots" placeholder="SIM Slots">
   </div>
   <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.display" placeholder="display">
+    <input matInput [(ngModel)]="data.display" placeholder="Display">
   </div>
   <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.displayResolution" placeholder="displayResolution">
+    <input matInput [(ngModel)]="data.displayResolution" placeholder="Display Resolution">
   </div>
   <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.displayDimensions" placeholder="displayDimensions">
+    <input matInput [(ngModel)]="data.displayDimensions" placeholder="Display Dimensions">
   </div>
   <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.dimensions" placeholder="dimensions">
+    <input matInput [(ngModel)]="data.dimensions" placeholder="Dimensions">
   </div>
   <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.mainCamera" placeholder="mainCamera">
+    <input matInput [(ngModel)]="data.mainCamera" placeholder="Main Camera">
   </div>
   <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.frontalCamera" placeholder="frontalCamera">
+    <input matInput [(ngModel)]="data.frontalCamera" placeholder="Frontal Camera">
   </div>
   <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.battery" placeholder="battery">
+    <input matInput [(ngModel)]="data.battery" placeholder="Battery">
   </div>
   <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.price" placeholder="price">
+    <input matInput [(ngModel)]="data.price" placeholder="Price">
   </div>
   <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.inStock" placeholder="inStock">
+    <input matInput [(ngModel)]="data.inStock" placeholder="In Stock">
   </div>
  
-  <div mat-dialog-actions class="float-end">
-    <button mat-raised-button color="primary" [mat-dialog-close]="data" cdkFocusInitial>
+  <div mat-dialog-actions>
+    <button mat-raised-button [mat-dialog-close]="data" cdkFocusInitial class="button">
         {{data?.confirmText}}
     </button>
   </div>
+
+</div>

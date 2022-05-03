@@ -48,13 +48,15 @@ import { ClientConfirmComponent } from './dialogs/clients/client-confirm/client-
 import { ClientCreateComponent } from './dialogs/clients/client-create/client-create.component';
 import { ClientEditComponent } from './dialogs/clients/client-edit/client-edit.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
-import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+
 import { CartsComponent } from './carts/carts.component';
 import { MatSelectModule } from '@angular/material/select';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { AuthService } from './_services/auth.service';
+import { ProfileComponent } from './profile/profile.component';
+import { ProfileEditComponent } from './dialogs/clients/profile-edit/profile-edit.component';
+import { PasswordEditComponent } from './dialogs/clients/password-edit/password-edit.component';
 
 
 
@@ -86,11 +88,13 @@ import { AuthService } from './_services/auth.service';
     ClientCreateComponent,
     ClientEditComponent,
     ProductDetailsComponent,
-    HomeComponent,
+
     LoginComponent,
-    RegisterComponent,
     CartsComponent,
     OrderDetailsComponent,
+    ProfileComponent,
+    ProfileEditComponent,
+    PasswordEditComponent,
 
   ],
   imports: [

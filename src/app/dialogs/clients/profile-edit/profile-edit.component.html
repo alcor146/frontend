@@ -1,28 +1,19 @@
 <div class="header close">
- 
     <button mat-icon-button [mat-dialog-close]="data" (click)="onclose()">
         <mat-icon>close</mat-icon>
     </button>
   </div>
   
   <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.role" placeholder="Role">
-  </div>
-  <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.email" placeholder="Email">
-  </div>
-  <div mat-dialog-content>
     <input matInput [(ngModel)]="data.name" placeholder="Name">
   </div>
   <div mat-dialog-content>
     <input matInput [(ngModel)]="data.phoneNumber" placeholder="Phone Number">
   </div>
-  <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.password" placeholder="Password">
-  </div>
- 
-  <div mat-dialog-actions >
+  
+  <div mat-dialog-actions>
     <button mat-raised-button color="primary" [mat-dialog-close]="data" cdkFocusInitial class="button">
         {{data?.confirmText}}
     </button>
   </div>
+

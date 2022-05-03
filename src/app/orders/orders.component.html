@@ -1,16 +1,20 @@
    <div class="container mt-5">
-    <div class="inline">
+    <div class="inline" *ngIf="records.length > 0">
       <input type="text" class="form-control inline" placeholder="Search..." [(ngModel)]="filterTerm">
     </div>
     <div class="order-list">
       <div class="order-container" *ngFor="let record of records | filter: filterTerm">
-        <h5>comanda {{record._id}}</h5>
-        <p>Plasata pe {{record.date}}</p>
+        <h5>Order id  {{record._id}}</h5>
+        <p>Date {{record.date}}</p>
         <p>Status: {{record.status}}</p>
         <p>Total: {{record.price}}</p>
         <button class="button" mat-raised-button color="primary" (click) ="redirectToOrder(record._id)">Details</button>
-        <button class="button" mat-raised-button color="warn" (click) ="cancelOrder(record)" >Cancel</button>
-        <button class="button" mat-raised-button color="accent" (click) ="openDeleteDialog(record)" *ngIf="role == 'admin'">Delete</button>
+        <button class="button" mat-raised-button color="warn" (click) ="cancelOrder(record)" *ngIf="record.status == 'New' && role == 'basic'" >Cancel</button>
+        <button class="button" mat-raised-button color="warn" (click) ="cancelOrder(record)" *ngIf="record.status != 'New' && role == 'basic'" disabled >Cancel</button>
+        <button class="button" mat-raised-button color="warn" (click) ="openDeleteDialog(record)" *ngIf="role == 'admin'">Delete</button>
       </div>
     </div>
    </div>
+   <div *ngIf="records.length == 0">
+    <h2 class="center">No orders to display</h2>
+  </div>

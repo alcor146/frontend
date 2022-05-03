@@ -20,8 +20,10 @@ img{
 
 .button{
     margin-left: 20px;
-    height: 35px;
+    height: 40px;
     width: 90px;
+    font-size: 17px;
+    padding: 2px;
 }
 
 .product-details {
@@ -53,7 +55,8 @@ img{
   
     padding: 20px;
     width: 550px;
-    border-style: solid;
+    height: 450px;
+    
 }
 
 .inline {
@@ -69,7 +72,6 @@ img{
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-
     padding: 10px;
 }
 
@@ -77,6 +79,7 @@ img{
     width:160px !important;
     font-size: 13px !important;
     margin-right: -50px;
+    justify-content: right;
     
   } 
 
@@ -89,6 +92,6 @@ img{
 }
 
 #price {
-    font-size: 20px;
-    margin-left: 20px;
+    font-size: 25px;
+    margin-left: 15px;
 }

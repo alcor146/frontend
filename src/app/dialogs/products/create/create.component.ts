@@ -18,6 +18,7 @@ export class CreateComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    window.scroll(0,0);
   }
 
 }

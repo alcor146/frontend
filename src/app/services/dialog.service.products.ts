@@ -33,7 +33,8 @@ export class DialogService {
     const popUp = this.dialog
     .open(EditComponent, {
       data: data,
-      width: '400px',
+      width: '520px',
+      height: "580px",
       disableClose: true,
     });
 
@@ -44,8 +45,8 @@ export class DialogService {
     const popUp = this.dialog
     .open(PreviewComponent, {
       data: data,
-      width: '1000px',
-      height: '600px',
+      width: '520px',
+      height: "580px",
       disableClose: true,
     });
 
@@ -56,8 +57,10 @@ export class DialogService {
     const popUp = this.dialog
     .open(CreateComponent, {
       data: data,
-      width: '400px',
+      width: '520px',
+      height: "580px",
       disableClose: true,
+      autoFocus: false
     });
 
     return popUp.afterClosed();

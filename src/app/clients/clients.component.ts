@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { DialogService } from '../services/dialog.service.clients';
 
 @Component({
@@ -57,16 +57,13 @@ export class ClientsComponent implements OnInit {
     }).subscribe( ( result ) => {  
       if(result.toString() == "true"){
         console.log(record)   
-        this.http.delete(`http://localhost:3001/api/clients/${record._id}`)
+        let headers = new HttpHeaders();
+        headers = headers.set('createdby', record.email);
+
+        this.http.delete(`http://localhost:3001/api/clients/${record._id}`, {headers})
         .subscribe((res) =>{
           console.log(res);
-          this.http.delete(`http://localhost:3001/api/carts/${record.email}`)
-          .subscribe((res) =>{
-            console.log(res);
-  
-            
-            this.showClients();
-          })
+          this.showClients();
         })
       } else {
         console.log("NUUUUUUUUU");

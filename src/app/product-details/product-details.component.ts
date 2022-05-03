@@ -3,6 +3,8 @@ import { HttpClient} from '@angular/common/http';
 import { DialogService } from 'src/app/services/dialog.service.products';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router'
+import { RBACService } from '../_helpers/rbac';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-product-details',
@@ -17,16 +19,32 @@ export class ProductDetailsComponent implements OnInit {
   featuredImage: any
   images:any = []
   imagePositions = ["front", "back", "side"]
-  role: string ="admin"
+  role: string =""
+  user: string = ""
+  public isVisible: boolean = false;
+  addedToCart: boolean = false;
+  outOfStock: boolean = false;
 
-  constructor(private route: ActivatedRoute , private router: Router, private http: HttpClient, private dialogService: DialogService){}
+  constructor(private route: ActivatedRoute , private router: Router, private http: HttpClient, private dialogService: DialogService, private rbacService: RBACService, private authService: AuthService){}
   
   ngOnInit(): void {
     if(this.route.snapshot.paramMap.get('id') != null)
       this.productId = this.route.snapshot.paramMap.get('id') || ""
     console.log(this.productId)
-    this.showProduct()
-    
+    this.getRoles() 
+  }
+
+  getRoles(){
+    this.rbacService.getRoles().subscribe((data) =>{
+      if(data.status == "200"){
+        this.role = data.token.role
+        this.user = data.token.userId
+        this.showProduct();
+      }else{
+        this.authService.logOut()
+        window.location.reload();
+      }
+    })
   }
 
   showProduct(){
@@ -71,23 +89,20 @@ export class ProductDetailsComponent implements OnInit {
 
   addToCart(){
     if(this.productDetails.inStock == 0){
-      this.dialogService.confirmDialog({
-        message: "Out of stock", 
-        confirmText: '',
-        cancelText: ''
-      }).subscribe( ( result ) => {  
-        console.log(result)
-      });
+      this.outOfStock = true
+      this.showAlert()
     }else {
       let body = {
         "name": this.productDetails.name,
         "value": "1",
       }
       console.log(body)
-      this.http.put(`http://localhost:3001/api/carts/${this.role}`, body)
+      this.http.put(`http://localhost:3001/api/carts/${this.user}`, body)
       .subscribe((res) =>{
         let result = JSON.parse(JSON.stringify(res))
         console.log(result)
+        this.addedToCart = true
+        this.showAlert()
       })
     }
     
@@ -182,6 +197,19 @@ openDeleteDialog(){
       }
     });
 
+  }
+
+  showAlert() : void {
+    if (this.isVisible) { // if the alert is visible return
+      return;
+    } 
+    this.isVisible = true;
+    setTimeout(()=> {
+      this.isVisible = false
+      this.addedToCart = false
+      this.outOfStock = false
+
+    },2500); // hide the alert after 2.5s
   }
 
 

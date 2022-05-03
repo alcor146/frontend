@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { DialogService } from '../services/dialog.service.cards';
 import { RBACService } from '../_helpers/rbac';
+import { AuthService } from '../_services/auth.service';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class CardsComponent implements OnInit {
   user: string = ""
 
 
-  constructor(private http: HttpClient, private dialogService: DialogService, private rbacService: RBACService) { 
+  constructor(private http: HttpClient, private dialogService: DialogService, private rbacService: RBACService, private authService: AuthService) { 
     
   }
 
@@ -37,6 +38,9 @@ export class CardsComponent implements OnInit {
         this.user = data.token.userId
         this.role = data.token.role
         this.showCards();
+      }else{
+        this.authService.logOut()
+        window.location.reload();
       }
     })
   }

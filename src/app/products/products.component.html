@@ -1,45 +1,7 @@
-<!-- <div class="container mt-5">
-    <div class="inline">
-      <input type="text" class="form-control inline" placeholder="Search..." [(ngModel)]="filterTerm">
-      <button class="button" mat-raised-button color="primary" (click) ="openCreateDialog()">New Order</button>
-    </div>
-      
-    <table mat-table class="table table-striped">
-      <thead class="thead-dark">
-          <tr>
-            <th>Name</th>
-            <th>OS</th>
-            <th>Price</th>
-            <th>In Stock</th>
-            <th>Actions</th>
-          </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let record of records | filter: filterTerm | paginate: { itemsPerPage:10, currentPage: page}">
-          <td>{{ record.name }}</td>
-          <td>{{ record.OS }}</td>
-          <td>{{ record.price }}</td>
-          <td>{{ record.inStock }}</td>
-          <td>
-            <button class="button" mat-raised-button color="warn" (click)="openDeleteDialog(record)">Delete</button>
-            <button class="button" mat-raised-button color="primary" (click)="openEditDialog(record)">Edit</button>
-            <button class="button" mat-raised-button color="secondary" (click)="openPreviewDialog(record)">Preview</button>
-          </td>
-          </tr>
-      </tbody>
-    </table>
-  </div>
-    <div class="d-flex justify-content-center">
-      <pagination-controls 
-        previousLabel="Prev" 
-        nextLabel="Next" 
-        (pageChange)="onTableDataChange($event)">
-      </pagination-controls>
-    </div> -->
 <div class="container mt-5">
     <div class="inline">
       <input type="text" class="form-control inline" placeholder="Search..." [(ngModel)]="filterTerm">
-      <button class="button" mat-raised-button color="primary" (click) ="openCreateDialog()">New Product</button>
+      <button class="button" mat-raised-button color="primary" (click) ="openCreateDialog()" *ngIf="role == 'admin'">New Product</button>
     </div>
   <div class="product-list">
     <div class="product-container" *ngFor="let record of records | filter: filterTerm">
@@ -51,12 +13,17 @@
           <h5 >{{record.name}} {{record.OS}} {{record.RAM}} {{record.internalMemory}} {{record.processor}}</h5>
         </div>
         <p *ngIf="record.inStock > 0">In stock {{record.inStock}}</p>
-          <p *ngIf="record.inStock == 0">Sold out</p>
+        <p *ngIf="record.inStock == 0">Sold out</p>
         {{record.price}} Ron
         <button class="button" mat-raised-button color="primary" (click)="addToCart(record)">Add to cart</button>
-
       </div>
     </div>
   </div>
+</div>
+<div class="alert" [class.visible]="isVisible" *ngIf="outOfStock"> 
+  Product is not available
+</div>
+<div class="alert" style="background: green" [class.visible]="isVisible" *ngIf="addedToCart"> 
+  Product added to cart
 </div>
   

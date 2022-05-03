@@ -1,26 +1,28 @@
-<div class="header float-end">
+
+<div class="edit">
+  <div class="header close">
  
     <button mat-icon-button [mat-dialog-close]="data" (click)="onclose()">
         <mat-icon>close</mat-icon>
     </button>
   </div>
   
-  <div class="header">
-    <h2 mat-dialog-title>{{data?.title}}</h2>
+
+  <div mat-dialog-content>
+    <input matInput [(ngModel)]="data.county" placeholder="County">
   </div>
   <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.county" placeholder="county">
+    <input matInput [(ngModel)]="data.town" placeholder="Town">
   </div>
   <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.town" placeholder="town">
-  </div>
-  <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.address" placeholder="address">
+    <input matInput [(ngModel)]="data.address" placeholder="Address">
   </div>
   
-  <div mat-dialog-actions class="float-end">
-    <button mat-raised-button color="primary" [mat-dialog-close]="data" cdkFocusInitial>
+  <div mat-dialog-actions>
+    <button mat-raised-button [mat-dialog-close]="data" cdkFocusInitial class="button">
         {{data?.confirmText}}
     </button>
   </div>
+
+</div>
 

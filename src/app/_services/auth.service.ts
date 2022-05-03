@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 const AUTH_API = 'http://localhost:3003/api/';
 @Injectable({
   providedIn: 'root'
@@ -8,8 +9,9 @@ const AUTH_API = 'http://localhost:3003/api/';
 export class AuthService {
 
   _isLoggedIn: boolean = false
+  public role: string = ""
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
   login(email: string, password: string): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -21,7 +23,9 @@ export class AuthService {
   }
   register(email: string, password: string, passwordConfirmation: string, name: string, phoneNumber: string): Observable<any> {
     const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+      headers: new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        observe: 'response' })
     };
     return this.http.post(AUTH_API + 'register', {
       email: email,
@@ -43,6 +47,11 @@ export class AuthService {
     };
 
     return this.http.get(AUTH_API + 'decodeToken', httpOptions);
+  }
+
+  logOut(){
+    localStorage.clear()
+    this.router.navigate(['/login'])
   }
 
 

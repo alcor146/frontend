@@ -17,9 +17,18 @@
         <B id="price">Date facturare</B>
         <br>
         <br>
-        <p>Destinatar: {{orderDetails.clientName}}</p>
-        <p>Numar de telefon: {{orderDetails.clientPhoneNumber}}</p>
-        <p>Adresa: {{orderDetails.location.county}}, {{orderDetails.location.town}},{{orderDetails.location.address}}</p>
+        <p>Customer: {{orderDetails.clientName}}</p>
+        <p>Phone Number: {{orderDetails.clientPhoneNumber}}</p>
+        <p>Address: {{orderDetails.location.county}}, {{orderDetails.location.town}},{{orderDetails.location.address}}</p>
+        <div *ngIf="role != 'basic'">
+            Status: <mat-form-field appearance="fill" class="mat-select-content">
+                <mat-label ></mat-label>
+                <mat-select (selectionChange)="statusOnChange($event.value)" [value]="orderStatus">
+                  <mat-option *ngFor="let status of records" [value]="status">{{status}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
         <b>Total</b>
         <p id="price">{{this.totalPrice}} Ron</p>
     </div>

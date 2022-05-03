@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { DialogService } from '../services/dialog.service.locations';
 import { RBACService } from '../_helpers/rbac';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-locations',
@@ -19,7 +20,7 @@ export class LocationsComponent implements OnInit {
   role: string = ""
   user: string = ""
 
-  constructor(private http: HttpClient, private dialogService: DialogService, private rbacService: RBACService) { 
+  constructor(private http: HttpClient, private dialogService: DialogService, private rbacService: RBACService, private authService: AuthService) { 
     
   }
 
@@ -30,6 +31,9 @@ export class LocationsComponent implements OnInit {
         this.user = data.token.userId
         this.role = data.token.role
         this.showLocations();
+      }else{
+        this.authService.logOut()
+        window.location.reload();
       }
     })
   }
@@ -67,6 +71,7 @@ export class LocationsComponent implements OnInit {
           this.records = jsonDB.data;
         })
       }
+      console.log(this.role)
       
   }
   

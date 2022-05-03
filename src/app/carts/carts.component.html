@@ -28,10 +28,10 @@
     </div>
         
     <div class="shop">
-      Address 
+
       <mat-form-field appearance="fill" class="mat-select-content">
-        <mat-label *ngIf="!selectedLocation">No location selected</mat-label>
-        <mat-label *ngIf="selectedLocation">{{selectedLocation.county}}</mat-label>
+        <mat-label >Delivery Address </mat-label>
+       
         <mat-select (selectionChange)="locationOnChange($event.value)" [value]="selectedLocation.county">
           <mat-option *ngFor="let location of locationRecords" [value]="location">{{location.county}}</mat-option>
         </mat-select>
@@ -42,11 +42,10 @@
       </div>
       <input type="text" class="form-control inline" placeholder="Address" [(ngModel)]="selectedLocation.address" readonly>
       <br>
-      Bank
       <mat-form-field appearance="fill" class="mat-select-content">
-        <mat-label *ngIf="!selectedCard">no card selected</mat-label>
-        <mat-label *ngIf="selectedCard">{{selectedCard.bank}}</mat-label>
-        <mat-select (selectionChange)="cardOnChange($event.value)" [value]="selectedCard.bank" required>
+        <mat-label>Credit Card Details</mat-label>
+       
+        <mat-select (selectionChange)="cardOnChange($event.value)" [value]="selectedCard.bank">
           <mat-option *ngFor="let card of cardRecords" [value]="card" >{{card.bank}}</mat-option>
         </mat-select>
     </mat-form-field>
@@ -61,6 +60,9 @@
     <div class="inline">
       <p id="price">Total: {{this.totalPrice}} Ron</p>
       <button class="button" mat-raised-button color="primary" (click) ="createOrder()">Order</button>
+      <button mat-mini-fab color="primary" style="margin-left: 15px;" (click)="openEditDialog()">
+        <mat-icon>edit</mat-icon>
+      </button>
     </div>
 
     <br>
@@ -69,5 +71,15 @@
       </div>
 
       <div *ngIf="records.length == 0">
-        <h2 class="center">Nu aveti produse in cos</h2>
+        <h2 class="center">The cart is empty</h2>
+      </div>
+
+      <div class="alert" style="background: green" [class.visible]="isVisible" *ngIf="orderCreated"> 
+        Order registered
+      </div>
+      <div class="alert"[class.visible]="isVisible" *ngIf="modalCard"> 
+        Select a credit card
+      </div>
+      <div class="alert"[class.visible]="isVisible" *ngIf="modalLocation"> 
+        Select a location
       </div>

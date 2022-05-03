@@ -1,0 +1,44 @@
+
+
+
+  input{
+    padding:5px;
+    margin:5px auto; 
+    border-radius:10px;
+    width: 350px;
+    display: block;
+    border: 2px solid #eee;  }
+
+  *, *:before, *:after {
+    box-sizing: border-box;
+  }
+
+  .center{
+      margin-right: 5px;
+      
+  }
+
+  .close{
+    display: flex;
+    justify-content: right;   
+    margin-top: -15px; 
+  }
+
+  .button{
+    padding:0px;
+    margin:5px auto; 
+    border-radius:10px;
+    width: 350px;
+    display: block;
+    background-color: #33adff;
+    color:#fff;
+    font-weight:600;
+  }
+
+  
+  
+
+
+
+  
+/* width */

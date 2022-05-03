@@ -4,6 +4,7 @@ import { DialogService } from '../services/dialog.service.orders';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router'
 import { RBACService } from '../_helpers/rbac';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-orders',
@@ -24,7 +25,7 @@ export class OrdersComponent implements OnInit {
   clientName: string = ""
   clients: any = []
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private dialogService: DialogService, private rbacService: RBACService) { 
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private dialogService: DialogService, private rbacService: RBACService, private authService: AuthService) { 
     
   }
 
@@ -48,23 +49,26 @@ export class OrdersComponent implements OnInit {
       if(data.status == "200"){
         this.user = data.token.userId
         this.role = data.token.role
+        console.log(this.role)
         this.showOrders()
       }else{
-        localStorage.clear()
-        location.reload();
+        this.authService.logOut()
+        window.location.reload();
       }
     })
   }
 
   cancelOrder(record: any){
-    console.log(record)
+
     let body = {
       status: "Canceled",
-      email: record.email
+      email: record.createdBy
     }
+   
+  
     this.http.put(`http://localhost:3001/api/orders/${record._id}`, body)
         .subscribe((response) => {
-          console.log(response)
+       
           this.showOrders()
         })
 

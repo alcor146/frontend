@@ -1,3 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
 @import "~bootstrap/dist/css/bootstrap.css";
+
+.alert  {
+	position: fixed;
+	top: 0;
+	right: 0.5rem;
+	width: 350px;
+	border:1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 0.25rem;
+	padding: 1.2rem;
+	background: #f65656;
+	color: #fff;
+	font-size: large;
+	font-weight: 700;
+	box-shadow: 0 5px 10px -5px rgba(0, 0, 0, 0.5);
+	transition:  all 0.2s ease-in-out;
+	opacity: 0;
+	text-align: center;
+}
+  
+  .visible {
+	opacity: 1;
+	transform: translateY(1.25rem);
+  }

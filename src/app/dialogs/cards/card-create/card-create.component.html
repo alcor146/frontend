@@ -1,32 +1,29 @@
-<div class="header float-end">
+<div class="header close">
  
     <button mat-icon-button [mat-dialog-close]="data" (click)="onclose()">
         <mat-icon>close</mat-icon>
     </button>
   </div>
-  
-  <div class="header">
-    <h2 mat-dialog-title>{{data?.title}}</h2>
+
+  <div mat-dialog-content>
+    <input matInput [(ngModel)]="data.bank" placeholder="Bank">
   </div>
   <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.bank" placeholder="bank">
+    <input matInput [(ngModel)]="data.cardNumber" placeholder="Card Number">
   </div>
   <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.cardNumber" placeholder="cardNumber">
-  </div>
-  <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.cardName" placeholder="cardName">
+    <input matInput [(ngModel)]="data.cardName" placeholder="Card Name">
   </div>
 
   <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.expirationDate" placeholder="expirationDate">
+    <input matInput [(ngModel)]="data.expirationDate" placeholder="Expiration Date">
   </div>
   <div mat-dialog-content>
-    <input matInput [(ngModel)]="data.securityCode" placeholder="securityCode">
+    <input matInput [(ngModel)]="data.securityCode" placeholder="Security Code">
   </div>
  
-  <div mat-dialog-actions class="float-end">
-    <button mat-raised-button color="primary" [mat-dialog-close]="data" cdkFocusInitial>
+  <div mat-dialog-actions >
+    <button mat-raised-button color="primary" [mat-dialog-close]="data" cdkFocusInitial class="button">
         {{data?.confirmText}}
     </button>
   </div>

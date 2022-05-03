@@ -17,17 +17,40 @@
                     <input type="password" name="confirmPassword" placeholder="Confirm Password" [(ngModel)]="registerModel.confirmPassword" #name="ngModel" #confirmPassword required>
 					<button type="submit" (click)="register()">Sign up</button>
 				</form>
-
 			</div>
-        
-
+			<div class="alert" [class.visible]="isVisible" *ngIf="allFieldsRequired"> 
+				All fields required
+			</div>
+			<div class="alert" [class.visible]="isVisible" *ngIf="invalidEmail"> 
+				Email is not valid
+			</div>
+			<div class="alert" [class.visible]="isVisible" *ngIf="passwordsDontMatch"> 
+				Passwords not matching
+			</div>
+			<div class="alert" [class.visible]="isVisible" *ngIf="emailAlreadyUsed"> 
+				User already exists
+			</div>
+			<div class="alert" style="background: green" [class.visible]="isVisible" *ngIf="registerSuccessfully"> 
+				User successfully registered
+			</div>
+			
 			<div class="login">
 				<form>
 					<label for="chk" aria-hidden="true">Login</label>
 					<input type="email" name="email" placeholder="Email" [(ngModel)]="loginModel.email" #name="ngModel" #email required>
 					<input type="password" name="pswd" placeholder="Password" [(ngModel)]="loginModel.password" #name="ngModel" #password required>
 					<button (click)="login()">Login</button>
+					<p (click)="changePassword()">Forgotten password?</p>
 				</form>
+			</div>
+			<div class="alert" [class.visible]="isVisible" *ngIf="wrongCredentials"> 
+				Incorect password or email
+			</div>
+			<div class="alert" [class.visible]="isVisible" *ngIf="noSuchUser"> 
+				No user with this email
+			</div>
+			<div class="alert" style="background: green" [class.visible]="isVisible" *ngIf="passwordChanged"> 
+				New password generated
 			</div>
 	</div>
 </body>
