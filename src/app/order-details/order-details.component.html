@@ -14,12 +14,12 @@
         </div>
     </div>
     <div class="order-detals">
-        <B id="price">Date facturare</B>
+        <B id="price">Order details</B>
         <br>
         <br>
         <p>Customer: {{orderDetails.clientName}}</p>
         <p>Phone Number: {{orderDetails.clientPhoneNumber}}</p>
-        <p>Address: {{orderDetails.location.county}}, {{orderDetails.location.town}},{{orderDetails.location.address}}</p>
+        <p>Address: {{orderDetails.location.county}}, {{orderDetails.location.town}}, {{orderDetails.location.address}}</p>
         <div *ngIf="role != 'basic'">
             Status: <mat-form-field appearance="fill" class="mat-select-content">
                 <mat-label ></mat-label>

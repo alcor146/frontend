@@ -49,7 +49,6 @@ export class OrdersComponent implements OnInit {
       if(data.status == "200"){
         this.user = data.token.userId
         this.role = data.token.role
-        console.log(this.role)
         this.showOrders()
       }else{
         this.authService.logOut()
@@ -97,13 +96,13 @@ export class OrdersComponent implements OnInit {
 
   showOrders(){
       if(this.role == "basic"){
-        console.log(this.user)
+       
         this.http.post('http://localhost:3001/api/orders/user', {createdBy: this.user})
         .subscribe((res) => {
           let jsonString = JSON.stringify(res);
           let jsonDB = JSON.parse(jsonString);
           this.records = jsonDB.data;
-          console.log(this.records)
+       
           for(let i=0; i<this.records.length; i++){
             for(let product of this.records[i].products ){
               this.totalPrice = this.totalPrice + product.price * product.count
@@ -111,15 +110,16 @@ export class OrdersComponent implements OnInit {
             this.records[i].price = this.totalPrice
             this.totalPrice = 0
           }
+          this.records.reverse()
         })
 
-      }else if (this.role == "admin"){
+      }else{
         this.http.get('http://localhost:3001/api/orders')
         .subscribe((res) => {
           let jsonString = JSON.stringify(res);
           let jsonDB = JSON.parse(jsonString);
           this.records = jsonDB.data;
-          console.log(this.records)
+       
           for(let i=0; i<this.records.length; i++){
             for(let product of this.records[i].products ){
               this.totalPrice = this.totalPrice + product.price * product.count
@@ -127,10 +127,11 @@ export class OrdersComponent implements OnInit {
             this.records[i].price = this.totalPrice
             this.totalPrice = 0
           }
+          this.records.reverse()
         })
-      }else{
-        console.log("not an admin or user")
       }
+   
+
       
   }
 
